@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from visuals.models import Visual
 # Create your views here.
-import urllib2
+import urllib3
 import re
 
 def index(request):
@@ -68,12 +68,13 @@ def submit(request):
 
 @csrf_exempt
 def get_imdb_id(request):
-    douban_id = request.GET.get('douban_id')
-    url = 'https://movie.douban.com/subject/' + douban_id
-    url_content = urllib2.urlopen(url).read()
-    answers = re.findall('href="http://www.imdb.com/title/(.*?)"', url_content)
-    imdb_id = ''
-    if len(answers) > 0:
-        imdb_id = answers[0]
-    response = {'imdb_id': imdb_id}
-    return JsonResponse(response)
+    # douban_id = request.GET.get('douban_id')
+    # url = 'https://movie.douban.com/subject/' + douban_id
+    # url_content = urllib2.urlopen(url).read()
+    # answers = re.findall('href="http://www.imdb.com/title/(.*?)"', url_content)
+    # imdb_id = ''
+    # if len(answers) > 0:
+    #     imdb_id = answers[0]
+    # response = {'imdb_id': imdb_id}
+    # return JsonResponse(response)
+    return JsonResponse({})
