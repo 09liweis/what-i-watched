@@ -8,7 +8,6 @@ django = "*"
 gunicorn = "*"
 psycopg2 = "*"
 whitenoise = "*"
-requests = "*"
 
 [requires]
 python_version = "3.6"
