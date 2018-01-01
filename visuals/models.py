@@ -14,7 +14,7 @@ class Visual(models.Model):
     rotten_id = models.CharField(max_length=60, blank=True)
     rotten_rating = models.IntegerField(blank=True, default=0)
     rotten_audience_rating = models.IntegerField(blank=True, default=0)
-    release_date = models.DateField(blank=True)
+    release_date = models.TextField(blank=True)
     poster = models.TextField(blank=True)
     summary = models.TextField(blank=True)
     online_source = models.TextField(blank=True)

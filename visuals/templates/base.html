@@ -2,8 +2,14 @@
 <html>
 <head>
     <title>What I Watched</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'muse-ui.css' %}" type="text/css" />
 </head>
 <body>
 {% block content %}{% endblock %}
+{% load static %}
+<script src="{% static 'app.min.js?v=1.0.0.0' %}"></script>
 </body>
 </html>
