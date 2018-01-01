@@ -6,8 +6,10 @@ from visuals.models import Visual
 import urllib3
 import re
 
-def index(request):
-    return render(request, 'index.html')
+def json_response(result):
+    resp = JsonResponse(result)
+    resp['Access-Control-Allow-Origin'] = '*'
+    return resp
 
 def list(request):
     visuals = Visual.objects.all()
@@ -20,7 +22,7 @@ def list(request):
             'douban_rating': visual.douban_rating,
             'poster': visual.poster
         })
-    return JsonResponse({'results': results})
+    return json_response({'results': results})
 
 def detail(request, id):
     visual = get_object_or_404(Visual, pk=id)
@@ -43,7 +45,8 @@ def detail(request, id):
         'current_episode': visual.current_episode,
         'visual_type': visual.visual_type
     }
-    return JsonResponse({'result': result})
+    result = {'result': result}
+    return json_response(result)
 
 @csrf_exempt
 def submit(request):
@@ -64,17 +67,18 @@ def submit(request):
             value = int(value)
         setattr(visual, key, value)
     visual.save()
-    return JsonResponse({'status': 200})
+    result = {'status': 200}
+    return json_response(result)
 
 @csrf_exempt
 def get_imdb_id(request):
-    # douban_id = request.GET.get('douban_id')
-    # url = 'https://movie.douban.com/subject/' + douban_id
-    # url_content = urllib2.urlopen(url).read()
-    # answers = re.findall('href="http://www.imdb.com/title/(.*?)"', url_content)
-    # imdb_id = ''
-    # if len(answers) > 0:
-    #     imdb_id = answers[0]
-    # response = {'imdb_id': imdb_id}
-    # return JsonResponse(response)
-    return JsonResponse({})
+    douban_id = request.GET.get('douban_id')
+    url = 'https://movie.douban.com/subject/' + douban_id
+    url_content = urllib3.PoolManager().request('GET', url)
+    print(url_content.data)
+    answers = re.findall('href="http://www.imdb.com/title/(.*?)"', url_content.data.decode('utf-8'))
+    imdb_id = ''
+    if len(answers) > 0:
+        imdb_id = answers[0]
+    response = {'imdb_id': imdb_id}
+    return json_response(response)

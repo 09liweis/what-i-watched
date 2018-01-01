@@ -10,7 +10,6 @@ import visuals.views
 # url(r'^blog/', include('blog.urls')),
 
 urlpatterns = [
-    url(r'^$', visuals.views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/visuals', visuals.views.list, name='visuals'),
     url(r'^api/visual/(?P<id>\d+)', visuals.views.detail, name='detail'),
