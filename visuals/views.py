@@ -14,18 +14,19 @@ def json_response(result):
 def list(request):
     visuals = Visual.objects.all().order_by('-date_updated')
     results = []
-    for visual in visuals:
+    for v in visuals:
         results.append({
-            'id': visual.id,
-            'title': visual.title,
-            'original_title': visual.original_title,
-            'douban_rating': visual.douban_rating,
-            'poster': visual.poster,
-            'episodes': visual.episodes,
-            'current_episode': visual.current_episode,
-            'imdb_id': visual.imdb_id,
-            'imdb_rating': visual.imdb_rating,
-            'date_updated': visual.date_updated
+            'id': v.id,
+            'title': v.title,
+            'original_title': v.original_title,
+            'douban_rating': v.douban_rating,
+            'poster': v.poster,
+            'episodes': v.episodes,
+            'current_episode': v.current_episode,
+            'imdb_id': v.imdb_id,
+            'imdb_rating': v.imdb_rating,
+            'date_updated': v.date_updated,
+            'rotten_rating': v.rotten_rating
         })
     return json_response({'results': results})
 
