@@ -19,6 +19,7 @@ def list(request):
             'id': v.id,
             'title': v.title,
             'original_title': v.original_title,
+            'douban_id': v.douban_id,
             'douban_rating': v.douban_rating,
             'poster': v.poster,
             'episodes': v.episodes,
