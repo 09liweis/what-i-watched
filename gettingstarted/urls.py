@@ -17,4 +17,5 @@ urlpatterns = [
     url(r'^api/get_imdb_id', visuals.views.get_imdb_id, name='get_imdb'),
     
     url(r'^api/songs', visuals.views.songs, name='songs'),
+    url(r'^api/song/submit', visuals.views.song_submit, name='song_submit'),
 ]
