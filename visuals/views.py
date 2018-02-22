@@ -127,8 +127,7 @@ def song_submit(request):
     song.artist = artist
     song.url = url
     song.image = image
-    song.visual = visual
-    
+
     song.save()
     result = {'result': 200}
     return json_response(result)
