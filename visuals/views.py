@@ -93,10 +93,13 @@ def get_imdb_id(request):
 def songs(request):
     pass
 
+@csrf_exempt
 def song_submit(request):
     id = request.POST.get('id')
     if int(id) == 0:
-        song = Song.objects.create()
+        visual_id = request.POST.get('visual_id')
+        visual = Visual.objects.get(id=visual_id)
+        song = Song.objects.create(visual=visual)
     else:
         song = Song.objects.get(id=id)
     
@@ -104,10 +107,7 @@ def song_submit(request):
     artist = request.POST.get('artist')
     url = request.POST.get('url')
     image = request.POST.get('image')
-    visual_id = request.POST.get('visual_id')
-    
-    visual = Visual.objects.get(id=visual_id)
-    
+
     song.title = title
     song.artist = artist
     song.url = url
