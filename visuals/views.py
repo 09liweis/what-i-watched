@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from visuals.models import Visual
+from visuals.models import Visual, Song
 # Create your views here.
 import urllib3
 import re
@@ -90,6 +90,23 @@ def get_imdb_id(request):
     response = {'imdb_id': imdb_id}
     return json_response(response)
 
-
 def songs(request):
     pass
+
+def song_submit(request):
+    id = request.POST.get('id')
+    if int(id) == 0:
+        song = Song.objects.create()
+    else:
+        song = Song.objects.get(id=id)
+    
+    title = request.POST.get('title')
+    artist = request.POST.get('artist')
+    url = request.POST.get('url')
+    image = request.POST.get('image')
+    visual_id = request.POST.get('visual_id')
+    
+    song.title = title
+    song.artist = artist
+    song.url = url
+    song.image = image
