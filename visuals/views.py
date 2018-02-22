@@ -91,7 +91,22 @@ def get_imdb_id(request):
     return json_response(response)
 
 def songs(request):
-    pass
+    songs = Song.objects.all().order_by('-date_updated')
+    results = []
+    for s in songs:
+        results.append({
+            'id': s.id,
+            'title': s.title,
+            'artist': s.artist,
+            'url': s.url,
+            'image': s.image,
+            'visual': {
+                'id': s.visual.id,
+                'title': s.visual.title,
+                'original_title': s.visual.original_title
+            }
+        })
+    return json_response({'results': results})
 
 @csrf_exempt
 def song_submit(request):
