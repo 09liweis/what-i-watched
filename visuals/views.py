@@ -106,7 +106,14 @@ def song_submit(request):
     image = request.POST.get('image')
     visual_id = request.POST.get('visual_id')
     
+    visual = Visual.objects.get(id=visual_id)
+    
     song.title = title
     song.artist = artist
     song.url = url
     song.image = image
+    song.visual = visual
+    
+    song.save()
+    result = {'result': 200}
+    return json_response(result)
