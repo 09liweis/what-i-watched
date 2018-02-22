@@ -89,3 +89,7 @@ def get_imdb_id(request):
         imdb_id = answers[0]
     response = {'imdb_id': imdb_id}
     return json_response(response)
+
+
+def songs(request):
+    pass

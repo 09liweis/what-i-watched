@@ -14,5 +14,7 @@ urlpatterns = [
     url(r'^api/visuals', visuals.views.list, name='visuals'),
     url(r'^api/visual/(?P<id>\d+)', visuals.views.detail, name='detail'),
     url(r'^api/visual/submit', visuals.views.submit, name='submit'),
-    url(r'^api/get_imdb_id', visuals.views.get_imdb_id, name='get_imdb')
+    url(r'^api/get_imdb_id', visuals.views.get_imdb_id, name='get_imdb'),
+    
+    url(r'^api/songs', visuals.views.songs, name='songs'),
 ]
