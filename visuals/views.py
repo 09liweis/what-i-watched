@@ -33,6 +33,7 @@ def list(request):
 
 def detail(request, id):
     visual = get_object_or_404(Visual, pk=id)
+    songs = Song.objects.get(visual=visual)
     result = {
         'id': visual.id,
         'title': visual.title,
@@ -50,7 +51,7 @@ def detail(request, id):
         'online_source': visual.online_source,
         'episodes': visual.episodes,
         'current_episode': visual.current_episode,
-        'visual_type': visual.visual_type
+        'visual_type': visual.visual_type,
     }
     result = {'result': result}
     return json_response(result)
@@ -90,11 +91,14 @@ def get_imdb_id(request):
     response = {'imdb_id': imdb_id}
     return json_response(response)
 
-def visual_songs(request):
-    pass
-
+# /api/songs?visual_id=1
+# /api/songs
 def songs(request):
-    songs = Song.objects.all().order_by('-date_updated')
+    visual_id = request.GET.get('visual_id')
+    if (visual_id):
+        songs = Song.objects.filter(visual_id=visual_id).order_by('-date_updated')
+    else:
+        songs = Song.objects.all().order_by('-date_updated')
     results = []
     for s in songs:
         results.append({
