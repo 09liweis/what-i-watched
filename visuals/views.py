@@ -121,7 +121,8 @@ def song_detail(request, id):
         'title': song.title,
         'artist': song.artist,
         'url': song.url,
-        'image': song.image
+        'image': song.image,
+        'visual_id': song.visual.id
     }
     return json_response({'result': result})
 
