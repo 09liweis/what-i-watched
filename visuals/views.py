@@ -90,6 +90,9 @@ def get_imdb_id(request):
     response = {'imdb_id': imdb_id}
     return json_response(response)
 
+def visual_songs(request):
+    pass
+
 def songs(request):
     songs = Song.objects.all().order_by('-date_updated')
     results = []
