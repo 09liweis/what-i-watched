@@ -33,7 +33,6 @@ def list(request):
 
 def detail(request, id):
     visual = get_object_or_404(Visual, pk=id)
-    songs = Song.objects.get(visual=visual)
     result = {
         'id': visual.id,
         'title': visual.title,
@@ -116,7 +115,15 @@ def songs(request):
     return json_response({'results': results})
 
 def song_detail(request, id):
-    pass
+    song = Song.objects.get(id=id)
+    result = {
+        'id': song.id,
+        'title': song.title,
+        'artist': song.artist,
+        'url': song.url,
+        'image': song.image
+    }
+    return json_response({'result': result})
 
 @csrf_exempt
 def song_submit(request):
