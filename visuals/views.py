@@ -115,6 +115,9 @@ def songs(request):
         })
     return json_response({'results': results})
 
+def song_detail(request, id):
+    pass
+
 @csrf_exempt
 def song_submit(request):
     id = request.POST.get('id')
