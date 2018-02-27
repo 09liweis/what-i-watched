@@ -95,6 +95,7 @@ def get_imdb_id(request):
 def songs(request):
     visual_id = request.GET.get('visual_id')
     if (visual_id):
+        # get songs for specific visual
         songs = Song.objects.filter(visual_id=visual_id).order_by('-date_updated')
     else:
         songs = Song.objects.all().order_by('-date_updated')
@@ -130,6 +131,7 @@ def song_detail(request, id):
 def song_submit(request):
     id = request.POST.get('id')
     if int(id) == 0:
+        # create song with initial visual relationship
         visual_id = request.POST.get('visual_id')
         visual = Visual.objects.get(id=visual_id)
         song = Song.objects.create(visual=visual)
