@@ -85,6 +85,16 @@ def submit(request):
     return json_response(result)
 
 @csrf_exempt
+def increase_episode(request, id):
+    visual = Visual.objects.get(id=id)
+    visual.current_episode += 1
+    visual.save()
+    result = {
+        'status': 200
+    }
+    return json_response(result)
+
+@csrf_exempt
 def get_imdb_id(request):
     douban_id = request.GET.get('douban_id')
     url = 'https://movie.douban.com/subject/' + douban_id

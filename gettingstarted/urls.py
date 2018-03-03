@@ -12,9 +12,12 @@ import visuals.views
 urlpatterns = [
     url(r'^', visuals.views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
+    
+    
     url(r'^api/visuals', visuals.views.visuals, name='visuals'),
     url(r'^api/visual/(?P<id>\d+)', visuals.views.detail, name='detail'),
     url(r'^api/visual/submit', visuals.views.submit, name='submit'),
+    url(r'^api/visual/(?P<id>\d+)/increase_episode', visuals.views.increase_episode, name='increase_episode'),
     url(r'^api/get_imdb_id', visuals.views.get_imdb_id, name='get_imdb'),
     
     url(r'^api/songs', visuals.views.songs, name='songs'),
