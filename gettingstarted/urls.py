@@ -10,8 +10,9 @@ import visuals.views
 # url(r'^blog/', include('blog.urls')),
 
 urlpatterns = [
+    url(r'^', visuals.views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api/visuals', visuals.views.list, name='visuals'),
+    url(r'^api/visuals', visuals.views.visuals, name='visuals'),
     url(r'^api/visual/(?P<id>\d+)', visuals.views.detail, name='detail'),
     url(r'^api/visual/submit', visuals.views.submit, name='submit'),
     url(r'^api/get_imdb_id', visuals.views.get_imdb_id, name='get_imdb'),

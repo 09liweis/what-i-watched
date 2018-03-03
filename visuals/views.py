@@ -6,12 +6,19 @@ from visuals.models import Visual, Song
 import urllib3
 import re
 
+def index(request):
+    result = {
+        'code': 200,
+        'msg': 'index page'
+    }
+    return json_response(result)
+
 def json_response(result):
     resp = JsonResponse(result)
     resp['Access-Control-Allow-Origin'] = '*'
     return resp
 
-def list(request):
+def visuals(request):
     visuals = Visual.objects.all().order_by('-date_updated')
     results = []
     for v in visuals:
