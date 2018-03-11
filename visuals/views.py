@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from visuals.models import Visual, Song
 # Create your views here.
-import urllib3
+# import urllib3
 import re
 
 def index(request):
