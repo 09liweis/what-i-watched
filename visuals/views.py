@@ -15,7 +15,7 @@ def index(request):
 
 def json_response(result):
     resp = JsonResponse(result)
-    resp['Access-Control-Allow-Origin'] = '*'
+    resp['Access-Control-Allow-Origin'] = 'https://porfolio-a09liweis.c9users.io,https://samliweisen.github.io'
     return resp
 
 def visuals(request):
