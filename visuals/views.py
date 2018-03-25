@@ -69,6 +69,9 @@ def detail(request, id):
 
 @csrf_exempt
 def submit(request):
+    '''
+    funciton to add or update visual
+    '''
     id = int(request.POST.get('id'))
     kv = dict(request.POST)
     del kv['id']
