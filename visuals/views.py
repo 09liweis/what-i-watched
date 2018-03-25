@@ -13,11 +13,13 @@ def index(request):
     }
     return json_response(result)
 
+
 def json_response(result):
     resp = JsonResponse(result)
     resp['Access-Control-Allow-Origin'] = '*'
     return resp
 
+# visual list function
 def visuals(request):
     visuals = Visual.objects.all().order_by('-date_updated')
     results = []
