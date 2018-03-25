@@ -41,6 +41,9 @@ def visuals(request):
     return json_response({'results': results})
 
 def detail(request, id):
+    '''
+    To send visual detail
+    '''
     visual = get_object_or_404(Visual, pk=id)
     result = {
         'id': visual.id,
