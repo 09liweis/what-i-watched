@@ -40,6 +40,10 @@ def visuals(request):
         })
     return json_response({'results': results})
 
+def checkDoubanExist(request, id):
+    visual = Visual.objects.get(imdb=id)
+    return json_response({})
+
 def detail(request, id):
     '''
     To send visual detail
