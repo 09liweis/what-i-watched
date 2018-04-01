@@ -40,9 +40,21 @@ def visuals(request):
         })
     return json_response({'results': results})
 
-def checkDoubanExist(request, id):
-    visual = Visual.objects.get(imdb=id)
-    return json_response({})
+def checkDoubanExist(request, douban_id):
+    visual = Visual.objects.get(douban_id=douban_id)
+    result = {}
+    print(visual)
+    if visual:
+        result = {
+            'msg': 'Douban Id exist',
+            'code': 'exist'
+        }
+    else:
+        result = {
+            'msg': 'Douban Id not exist',
+            'code': 'no exist'
+        }
+    return json_response(result)
 
 def detail(request, id):
     '''
