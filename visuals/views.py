@@ -41,6 +41,9 @@ def visuals(request):
     return json_response({'results': results})
 
 def checkDoubanExist(request, douban_id):
+    '''
+    Check if visual exist with douban id
+    '''
     try:
         visual = Visual.objects.get(douban_id=douban_id)
         result = {
