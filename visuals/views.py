@@ -36,7 +36,8 @@ def visuals(request):
             'imdb_id': v.imdb_id,
             'imdb_rating': v.imdb_rating,
             'date_updated': v.date_updated,
-            'rotten_rating': v.rotten_rating
+            'rotten_rating': v.rotten_rating,
+            'visual_type': v.visual_type,
         })
     return json_response({'results': results})
 
