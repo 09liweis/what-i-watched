@@ -46,3 +46,6 @@ class Song(models.Model):
     
     class Meta:
         ordering = ('date_updated',)
+
+class VisualImage(models.Model):
+    pass
