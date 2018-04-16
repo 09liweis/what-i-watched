@@ -48,4 +48,9 @@ class Song(models.Model):
         ordering = ('date_updated',)
 
 class VisualImage(models.Model):
-    pass
+    title = models.TextField(blank=True)
+    url = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+    visual = models.ForeignKey(Visual, on_delete=models.CASCADE)
+    
