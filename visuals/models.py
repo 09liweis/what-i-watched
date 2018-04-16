@@ -54,3 +54,7 @@ class VisualImage(models.Model):
     date_updated = models.DateTimeField(auto_now=True)
     visual = models.ForeignKey(Visual, on_delete=models.CASCADE)
     
+    def __str__(self):
+        return self.title
+    
+    
