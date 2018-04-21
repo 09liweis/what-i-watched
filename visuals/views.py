@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from visuals.models import Visual, Song
+from visuals.models import Visual, Song, VisualImage
 # Create your views here.
 # import urllib3
 import re
@@ -198,5 +198,12 @@ def song_submit(request):
 
 @csrf_exempt
 def image_submit(request):
+    id = request.POST.get('id')
+    if int(id) == 0:
+        visual_id = request.POST.get('visual_id')
+        visual = Visual.objects.get(id=visual_id)
+        image = VisualImage.objects.create(visual=visual)
+    else:
+        image = VisualImage.objects.get(id=id)
     result = {'result': 200}
     return json_response(result)
