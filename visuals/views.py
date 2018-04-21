@@ -205,5 +205,11 @@ def image_submit(request):
         image = VisualImage.objects.create(visual=visual)
     else:
         image = VisualImage.objects.get(id=id)
+    
+    title = request.POST.get('title')
+    url = request.POST.get('url')
+    image.title = title
+    image.url = url
+    image.save()
     result = {'result': 200}
     return json_response(result)
