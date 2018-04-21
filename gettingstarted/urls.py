@@ -25,5 +25,5 @@ urlpatterns = [
     url(r'^api/song/submit', visuals.views.song_submit, name='song_submit'),
     url(r'^api/song/(?P<id>\d+)', visuals.views.song_detail, name='song_detail'),
     
-    
+    url(r'^api/image/submit', visuals.views.image_submit, name='image_submit'),
 ]
