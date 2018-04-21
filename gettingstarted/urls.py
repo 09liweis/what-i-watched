@@ -24,4 +24,6 @@ urlpatterns = [
     url(r'^api/songs', visuals.views.songs, name='songs'),
     url(r'^api/song/submit', visuals.views.song_submit, name='song_submit'),
     url(r'^api/song/(?P<id>\d+)', visuals.views.song_detail, name='song_detail'),
+    
+    
 ]

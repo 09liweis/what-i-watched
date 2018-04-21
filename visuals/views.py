@@ -195,3 +195,8 @@ def song_submit(request):
     song.save()
     result = {'result': 200}
     return json_response(result)
+
+@csrf_exempt
+def image_submit(request):
+    result = {'result': 200}
+    return json_response(result)
