@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from visuals.models import Visual, Song, VisualImage
 # Create your views here.
-# import urllib3
+import urllib3
 import re
 
 def index(request):
@@ -126,7 +126,6 @@ def get_imdb_id(request):
     douban_id = request.GET.get('douban_id')
     url = 'https://movie.douban.com/subject/' + douban_id
     url_content = urllib3.PoolManager().request('GET', url)
-    print(url_content.data)
     answers = re.findall('href="http://www.imdb.com/title/(.*?)"', url_content.data.decode('utf-8'))
     imdb_id = ''
     if len(answers) > 0:
