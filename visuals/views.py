@@ -127,7 +127,9 @@ def get_imdb_id(request):
     url = 'https://movie.douban.com/subject/' + douban_id
     url_content = urllib3.PoolManager().request('GET', url)
     answers = re.findall('href="http://www.imdb.com/title/(.*?)"', url_content.data.decode('utf-8'))
+    # get list of release dates from webpage
     release_date_list = re.findall(r'[0-9]{4}-[0-9]{2}-[0-9]{2}\([\u4e00-\u9fff]+\)', url_content.data.decode('utf-8'))
+    # remove duplicate release date
     release_date_list = list(set(release_date_list))
     imdb_id = ''
     if len(answers) > 0:
