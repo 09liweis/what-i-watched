@@ -41,7 +41,7 @@ def visuals(request):
         })
     return json_response({'results': results})
 
-def checkDoubanExist(request, douban_id):
+def check_douban_id(request, douban_id):
     '''
     Check if visual exist with douban id
     '''
