@@ -86,7 +86,7 @@ def detail(request, id):
     return json_response(result)
 
 @csrf_exempt
-def submit(request):
+def visual_submit(request):
     '''
     funciton to add or update visual
     '''
