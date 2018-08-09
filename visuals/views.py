@@ -112,6 +112,9 @@ def visual_submit(request):
 
 @csrf_exempt
 def increase_episode(request):
+    '''
+    Increase one episode of the unfinished visual
+    '''
     id = request.GET.get('id')
     visual = Visual.objects.get(id=id)
     visual.current_episode += 1
