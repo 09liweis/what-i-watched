@@ -11,7 +11,7 @@ import visuals.views
 
 urlpatterns = [
     url(r'^$', visuals.views.index, name='index'),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     
     
     url(r'^api/visuals', visuals.views.visuals, name='visuals'),
