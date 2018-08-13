@@ -72,6 +72,16 @@ class Song(models.Model):
     
     class Meta:
         ordering = ('date_updated',)
+    
+    def get_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'artist': self.artist,
+            'url': self.url,
+            'image': self.image,
+            'visual_id': self.visual.id
+        }
 
 class VisualImage(models.Model):
     title = models.TextField(blank=True)
