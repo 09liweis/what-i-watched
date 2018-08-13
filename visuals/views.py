@@ -60,7 +60,7 @@ def check_douban_id(request, douban_id):
 
 def detail(request, id):
     '''
-    To send visual detail
+    Return response of visual detail based on visual id.
     '''
     visual = get_object_or_404(Visual, pk=id)
     result = {
