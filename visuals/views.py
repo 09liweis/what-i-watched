@@ -44,7 +44,7 @@ def check_douban_id(request, douban_id):
         }
     return json_response(result)
 
-def detail(request, id):
+def visual_detail(request, id):
     '''
     Return response of visual detail based on visual id.
     '''
