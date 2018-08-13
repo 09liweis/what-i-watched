@@ -31,6 +31,10 @@ class Visual(models.Model):
     
     class Meta:
         ordering = ['-date_watched']
+    
+    def increase_episode(self):
+        self.current_episode += 1
+        self.save(update_fields=['current_episode'])
 
 class Song(models.Model):
     title = models.CharField(max_length=60, blank=True)
