@@ -117,8 +117,7 @@ def increase_episode(request):
     '''
     id = request.GET.get('id')
     visual = Visual.objects.get(id=id)
-    visual.current_episode += 1
-    visual.save()
+    visual.increase_episode()
     result = {
         'status': 200
     }
