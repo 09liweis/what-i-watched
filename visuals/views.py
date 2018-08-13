@@ -24,21 +24,7 @@ def visuals(request):
     visuals = Visual.objects.all().order_by('-date_updated')
     results = []
     for v in visuals:
-        results.append({
-            'id': v.id,
-            'title': v.title,
-            'original_title': v.original_title,
-            'douban_id': v.douban_id,
-            'douban_rating': v.douban_rating,
-            'poster': v.poster,
-            'episodes': v.episodes,
-            'current_episode': v.current_episode,
-            'imdb_id': v.imdb_id,
-            'imdb_rating': v.imdb_rating,
-            'date_updated': v.date_updated,
-            'rotten_rating': v.rotten_rating,
-            'visual_type': v.visual_type,
-        })
+        results.append(v.json())
     return json_response({'results': results})
 
 def check_douban_id(request, douban_id):
