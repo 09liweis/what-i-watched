@@ -43,7 +43,7 @@ def visuals(request):
 
 def check_douban_id(request, douban_id):
     '''
-    Check if visual exist with douban id
+    Check if visual exists with douban id
     '''
     try:
         Visual.objects.get(douban_id=douban_id)
