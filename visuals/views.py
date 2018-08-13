@@ -63,27 +63,8 @@ def detail(request, id):
     Return response of visual detail based on visual id.
     '''
     visual = get_object_or_404(Visual, pk=id)
-    result = {
-        'id': visual.id,
-        'title': visual.title,
-        'original_title': visual.original_title,
-        'douban_id': visual.douban_id,
-        'douban_rating': visual.douban_rating,
-        'imdb_id': visual.imdb_id,
-        'imdb_rating': visual.imdb_rating,
-        'rotten_id': visual.rotten_id,
-        'rotten_rating': visual.rotten_rating,
-        'rotten_audience_rating': visual.rotten_audience_rating,
-        'release_date': visual.release_date,
-        'poster': visual.poster,
-        'summary': visual.summary,
-        'online_source': visual.online_source,
-        'episodes': visual.episodes,
-        'current_episode': visual.current_episode,
-        'visual_type': visual.visual_type,
-    }
-    result = {'result': result}
-    return json_response(result)
+    result = visual.json()
+    return json_response({'result': result})
 
 @csrf_exempt
 def visual_submit(request):
