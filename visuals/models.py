@@ -32,6 +32,28 @@ class Visual(models.Model):
     class Meta:
         ordering = ['-date_watched']
     
+    def json(self):
+        result = {
+            'id': self.id,
+            'title': self.title,
+            'original_title': self.original_title,
+            'douban_id': self.douban_id,
+            'douban_rating': self.douban_rating,
+            'imdb_id': self.imdb_id,
+            'imdb_rating': self.imdb_rating,
+            'rotten_id': self.rotten_id,
+            'rotten_rating': self.rotten_rating,
+            'rotten_audience_rating': self.rotten_audience_rating,
+            'release_date': self.release_date,
+            'poster': self.poster,
+            'summary': self.summary,
+            'online_source': self.online_source,
+            'episodes': self.episodes,
+            'current_episode': self.current_episode,
+            'visual_type': self.visual_type,
+        }
+        return result
+    
     def increase_episode(self):
         self.current_episode += 1
         self.save(update_fields=['current_episode'])
