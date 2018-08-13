@@ -82,8 +82,7 @@ def increase_episode(request):
     '''
     Increase one episode of the unfinished visual
     '''
-    id = request.GET.get('id')
-    visual = Visual.objects.get(id=id)
+    visual = Visual.objects.get(id = request.GET.get('id'))
     visual.increase_episode()
     result = {
         'status': 200,
