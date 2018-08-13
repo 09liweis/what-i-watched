@@ -119,7 +119,8 @@ def increase_episode(request):
     visual = Visual.objects.get(id=id)
     visual.increase_episode()
     result = {
-        'status': 200
+        'status': 200,
+        'current_episode': visual.current_episode
     }
     return json_response(result)
 
