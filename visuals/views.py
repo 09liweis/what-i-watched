@@ -137,15 +137,7 @@ def songs(request):
 
 def song_detail(request, id):
     song = Song.objects.get(id=id)
-    result = {
-        'id': song.id,
-        'title': song.title,
-        'artist': song.artist,
-        'url': song.url,
-        'image': song.image,
-        'visual_id': song.visual.id
-    }
-    return json_response({'result': result})
+    return json_response({'result': song.get_dict()})
 
 @csrf_exempt
 def song_submit(request):
