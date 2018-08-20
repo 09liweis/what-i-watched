@@ -48,8 +48,7 @@ def visual_detail(request, id):
     Return response of visual detail based on visual id.
     '''
     visual = get_object_or_404(Visual, pk=id)
-    result = visual.json()
-    return json_response({'result': result})
+    return json_response({'result': visual.json()})
 
 @csrf_exempt
 def visual_submit(request):
