@@ -33,7 +33,7 @@ class Visual(models.Model):
         ordering = ['-date_watched']
     
     def json(self):
-        result = {
+        return {
             'id': self.id,
             'title': self.title,
             'original_title': self.original_title,
@@ -52,7 +52,6 @@ class Visual(models.Model):
             'current_episode': self.current_episode,
             'visual_type': self.visual_type,
         }
-        return result
     
     def increase_episode(self):
         self.current_episode += 1
