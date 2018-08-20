@@ -146,8 +146,7 @@ def song_submit(request):
     song.image = image
 
     song.save()
-    result = {'result': 200}
-    return json_response(result)
+    return json_response({'result': 200})
 
 def images(request):
     visual_id = request.GET.get('visual_id')
