@@ -81,11 +81,10 @@ def increase_episode(request):
     '''
     visual = Visual.objects.get(id = request.GET.get('id'))
     visual.increase_episode()
-    result = {
+    return json_response({
         'status': 200,
         'current_episode': visual.current_episode
-    }
-    return json_response(result)
+    })
 
 @csrf_exempt
 def get_imdb_id(request):
