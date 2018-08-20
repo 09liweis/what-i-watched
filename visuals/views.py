@@ -7,11 +7,10 @@ import urllib3
 import re
 
 def index(request):
-    result = {
+    return json_response({
         'code': 200,
         'msg': 'index page'
-    }
-    return json_response(result)
+    })
 
 
 def json_response(result):
