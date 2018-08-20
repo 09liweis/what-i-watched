@@ -100,11 +100,10 @@ def get_imdb_id(request):
     imdb_id = ''
     if len(imdb_list) > 0:
         imdb_id = imdb_list[0]
-    response = {
+    return json_response({
         'imdb_id': imdb_id,
         'release_dates': release_dates
-    }
-    return json_response(response)
+    })
 
 # /api/songs?visual_id=1
 # /api/songs
