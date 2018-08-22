@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from visuals.models import Visual, Song, VisualImage
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 import urllib3
 import re
@@ -47,8 +48,12 @@ def visual_detail(request, id):
     '''
     Return response of visual detail based on visual id.
     '''
-    visual = get_object_or_404(Visual, pk=id)
-    return json_response({'result': visual.json()})
+    try: 
+        visual = Visual.objects.get(id=id)
+        result = visual.json()
+    except ObjectDoesNotExist:
+        result = None
+    return json_response({'result': result})
 
 @csrf_exempt
 def visual_submit(request):
