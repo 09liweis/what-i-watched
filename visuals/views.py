@@ -25,7 +25,7 @@ def visuals(request):
     results = []
     for v in visuals:
         results.append(v.json())
-    return json_response({'results': results})
+    return json_response({'results': results, 'count': len(results)})
 
 def check_douban_id(request, douban_id):
     '''
