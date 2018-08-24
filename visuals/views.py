@@ -22,7 +22,11 @@ def json_response(result):
 
 # visual list function
 def visuals(request):
-    visuals = Visual.objects.all().order_by('-date_updated')
+    offset = request.GET.get('offset')
+    limit = request.GET.get('limit')
+    print(offset)
+    print(limit)
+    visuals = Visual.objects.all().order_by('-date_updated')[:]
     results = []
     for v in visuals:
         results.append(v.json())
