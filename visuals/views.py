@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from visuals.models import Visual, Song, VisualImage
+from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 import urllib3
