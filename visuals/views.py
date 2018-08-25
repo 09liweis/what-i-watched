@@ -24,6 +24,8 @@ def json_response(result):
 def visuals(request):
     offset = request.GET.get('offset')
     limit = request.GET.get('limit')
+    if not limit:
+        limit = 10
     visuals = Visual.objects.all().order_by('-date_updated')[:]
     results = []
     for v in visuals:
