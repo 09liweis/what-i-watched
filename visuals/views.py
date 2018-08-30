@@ -11,7 +11,7 @@ import re
 def index(request):
     return json_response({
         'code': 200,
-        'msg': 'index page'
+        'msg': 'Nothing is here'
     })
 
 
