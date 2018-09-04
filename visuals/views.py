@@ -26,7 +26,7 @@ def visuals(request):
     limit = request.GET.get('limit')
     if not limit:
         limit = 10
-    visuals = Visual.objects.all().order_by('-date_updated')[:]
+    visuals = Visual.objects.all().order_by('-date_updated')
     results = []
     for v in visuals:
         results.append(v.json())
