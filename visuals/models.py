@@ -30,7 +30,7 @@ class Visual(models.Model):
         return self.title
     
     class Meta:
-        ordering = ['-date_watched']
+        ordering = ['-date_updated']
     
     def json(self):
         return {
@@ -50,7 +50,7 @@ class Visual(models.Model):
             'online_source': self.online_source,
             'episodes': self.episodes,
             'current_episode': self.current_episode,
-            'visual_type': self.visual_type,
+            'visual_type': self.visual_type
         }
     
     def increase_episode(self):
