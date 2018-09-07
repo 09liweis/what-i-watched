@@ -55,7 +55,7 @@ class Visual(models.Model):
     
     def increase_episode(self):
         self.current_episode += 1
-        self.save(update_fields=['current_episode, date_updated'])
+        self.save(update_fields=['current_episode', 'date_updated'])
 
 class Song(models.Model):
     title = models.CharField(max_length=60, blank=True)
