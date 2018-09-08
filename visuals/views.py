@@ -57,7 +57,7 @@ def visual_detail(request, id):
         visual = Visual.objects.get(id=id)
         result = visual.json()
     except ObjectDoesNotExist:
-        result = None
+        result = 'Visual Not Exsit'
     return json_response({'result': result})
 
 @csrf_exempt
