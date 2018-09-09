@@ -111,6 +111,7 @@ def get_imdb_id(request):
     if len(imdb_list) > 0:
         imdb_id = imdb_list[0]
     return json_response({
+        'status': 200,
         'imdb_id': imdb_id,
         'release_dates': release_dates
     })
