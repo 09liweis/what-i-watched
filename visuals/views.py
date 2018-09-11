@@ -99,6 +99,11 @@ def increase_episode(request):
 @csrf_exempt
 def get_imdb_id(request):
     douban_id = request.GET.get('douban_id')
+    if not douban_id:
+        return json_response({
+            'status': 200,
+            'msg': 'Douban id not found'
+        })
     douban_url = 'https://movie.douban.com/subject/' + douban_id
     url_content = urllib3.PoolManager().request('GET', douban_url)
     decode_data = url_content.data.decode('utf-8')
