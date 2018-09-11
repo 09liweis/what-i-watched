@@ -10,7 +10,7 @@ import re
 
 def index(request):
     return json_response({
-        'code': 200,
+        'status': 200,
         'msg': 'Nothing is here'
     })
 
