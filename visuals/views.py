@@ -28,11 +28,11 @@ def visuals(request):
         limit = 10
     if not offset:
         offset = 0
-    visuals = Visual.objects.all().order_by('-date_updated')
+    visuals = Visual.objects.all().order_by('-date_updated')[offset:limit]
     results = []
     for v in visuals:
         results.append(v.json())
-    return json_response({'results': results, 'count': len(results)})
+    return json_response({'results': results, 'count': len(results), 'per_page': limit})
 
 def check_douban_id(request, douban_id):
     '''
