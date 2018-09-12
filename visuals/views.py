@@ -26,6 +26,8 @@ def visuals(request):
     limit = request.GET.get('limit')
     if not limit:
         limit = 10
+    if not offset:
+        offset = 0
     visuals = Visual.objects.all().order_by('-date_updated')
     results = []
     for v in visuals:
