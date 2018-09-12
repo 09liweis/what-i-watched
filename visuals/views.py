@@ -30,6 +30,8 @@ def visuals(request):
         limit = int(limit)
     if not offset:
         offset = 0
+    else:
+        offset = int(offset)
     visuals = Visual.objects.all().order_by('-date_updated')[offset:limit]
     results = []
     for v in visuals:
