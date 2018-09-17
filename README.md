@@ -4,6 +4,8 @@ Tech Statck:
 * Django
 * Postgresql
 
+Douban API:
+https://github.com/veryyoung/movie/blob/master/douban%20api.md
 
 Todo:
 * Set up CMS for adding images and songs for visuals
