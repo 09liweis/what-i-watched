@@ -5,7 +5,7 @@ from visuals.models import Visual, Song, VisualImage
 from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
-import urllib3
+import urllib3, json
 import re
 
 def index(request):
@@ -128,7 +128,20 @@ def get_imdb_id(request):
     })
 
 def visual_update_cron(request):
-    pass
+    visuals = Visual.objects.all().order_by('-date_updated')
+    for visual in visuals:
+        douban_id = visual.douban_id
+        douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
+        url_content = urllib3.PoolManager().request('GET', douban_api)
+        decode_data = json.loads(url_content.data.decode('utf-8'))
+        
+        rating = decode_data['rating']['average']
+        
+        visual.douban_rating = rating
+        visual.save(update_fields=['douban_rating'])
+    return json_response({
+        'status': 200
+    })
 
 # /api/songs?visual_id=1
 # /api/songs
