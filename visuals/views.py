@@ -127,6 +127,9 @@ def get_imdb_id(request):
         'release_dates': release_dates
     })
 
+def visual_update_cron(request):
+    pass
+
 # /api/songs?visual_id=1
 # /api/songs
 def songs(request):
