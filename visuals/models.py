@@ -50,7 +50,9 @@ class Visual(models.Model):
             'online_source': self.online_source,
             'episodes': self.episodes,
             'current_episode': self.current_episode,
-            'visual_type': self.visual_type
+            'visual_type': self.visual_type,
+            'date_watched': self.date_watched,
+            'date_updated': self.date_updated
         }
     
     def increase_episode(self):
