@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^api/visual/increase_episode', visuals.views.increase_episode, name='increase_episode'),
     url(r'^api/get_imdb_id', visuals.views.get_imdb_id, name='get_imdb'),
     url(r'^api/visual_update_cron', visuals.views.visual_update_cron, name='visual_update_cron'),
+    url(r'^api/visual_import', visuals.views.visual_import, name='visual_import'),
     
     url(r'^api/songs', visuals.views.songs, name='songs'),
     url(r'^api/song/submit', visuals.views.song_submit, name='song_submit'),
