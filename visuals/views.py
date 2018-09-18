@@ -25,7 +25,7 @@ def visuals(request):
     offset = request.GET.get('offset')
     limit = request.GET.get('limit')
     if not limit:
-        limit = 10
+        limit = Visual.objects.all().count()
     else:
         limit = int(limit)
     if not offset:
@@ -139,6 +139,16 @@ def visual_update_cron(request):
         
         visual.douban_rating = rating
         visual.save(update_fields=['douban_rating'])
+    return json_response({
+        'status': 200
+    })
+
+def visual_import(request):
+    production_api = 'https://what-i-watched.herokuapp.com/api/visuals?limit=1000'
+    url_content = urllib3.PoolManager().request('GET', production_api)
+    decode_data = json.loads(url_content.data.decode('utf-8'))
+    visuals = decode_data['results']
+    print(len(visuals))
     return json_response({
         'status': 200
     })
