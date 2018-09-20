@@ -148,9 +148,9 @@ def visual_import(request):
     url_content = urllib3.PoolManager().request('GET', production_api)
     decode_data = json.loads(url_content.data.decode('utf-8'))
     visuals = decode_data['results']
-    print(len(visuals))
     return json_response({
-        'status': 200
+        'status': 200,
+        'visuals': visuals
     })
 
 # /api/songs?visual_id=1
