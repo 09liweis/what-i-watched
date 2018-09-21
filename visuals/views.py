@@ -148,6 +148,35 @@ def visual_import(request):
     url_content = urllib3.PoolManager().request('GET', production_api)
     decode_data = json.loads(url_content.data.decode('utf-8'))
     visuals = decode_data['results']
+    if len(visuals) > 0:
+        Visual.objects.all().delete()
+    for v in visuals:
+        visual = Visual.objects.create()
+        # for key in v:
+        #     setattr(visual, key, v[key])
+        #     if key == 'douban_id':
+        #         print(key)
+        #         print(v[key])
+        
+        visual.title = v['title']
+        visual.original_title = v['original_title']
+        visual.douban_id = v['douban_id']
+        visual.douban_rating = v['douban_rating']
+        visual.imdb_id = v['imdb_id']
+        visual.imdb_rating = v['imdb_rating']
+        visual.rotten_id = v['rotten_id']
+        visual.rotten_rating = v['rotten_rating']
+        visual.rotten_audience_rating = v['rotten_audience_rating']
+        visual.release_date = v['release_date']
+        visual.poster = v['poster']
+        visual.summary = v['summary']
+        visual.online_source = v['online_source']
+        visual.episodes = v['episodes']
+        visual.current_episode = v['current_episode']
+        visual.visual_type = v['visual_type']
+        visual.date_watched = v['date_watched']
+        visual.date_updated = v['date_updated']
+        visual.save()
     return json_response({
         'status': 200,
         'visuals': visuals
