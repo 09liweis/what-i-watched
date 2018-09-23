@@ -144,6 +144,7 @@ def visual_update_cron(request):
     })
 
 def visual_import(request):
+    '''Import production data to development'''
     production_api = 'https://what-i-watched.herokuapp.com/api/visuals?limit=1000'
     url_content = urllib3.PoolManager().request('GET', production_api)
     decode_data = json.loads(url_content.data.decode('utf-8'))
