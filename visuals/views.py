@@ -85,6 +85,9 @@ def visual_submit(request):
         setattr(visual, key, value)
     visual.save()
     return json_response({'status': 200})
+    
+def visual_delete(request):
+    pass
 
 @csrf_exempt
 def increase_episode(request):
