@@ -95,9 +95,12 @@ def visual_delete(request):
         msg = 'Id is not invalid'
     else:
         visual_id = int(visual_id)
-        visual = Visual.objects.get(id=visual_id)
-        visual.delete()
-        msg = 'Visual ' + id + ' has been deleted'
+        try: 
+            visual = Visual.objects.get(id=visual_id)
+            visual.delete()
+            msg = 'Visual ' + id + ' has been deleted'
+        except ObjectDoesNotExist:
+            msg = 'Visual Not Exsit'
     return json_response({'status': 200, 'msg': msg})
 
 @csrf_exempt
