@@ -88,10 +88,15 @@ def visual_submit(request):
     
 @csrf_exempt
 def visual_delete(request):
-    id = int(request.POST.get('id'))
-    visual = Visual.objects.get(id=id)
-    visual.delete()
-    return json_response({'status': 200})
+    visual_id = request.POST.get('id')
+    if not id:
+        msg = 'Id not found'
+    else:
+        visual_id = int(visual_id)
+        visual = Visual.objects.get(id=visual_id)
+        visual.delete()
+        msg = 'Visual ' + id + ' has been deleted'
+    return json_response({'status': 200, 'msg': msg})
 
 @csrf_exempt
 def increase_episode(request):
