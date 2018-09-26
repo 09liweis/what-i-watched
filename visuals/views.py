@@ -89,8 +89,10 @@ def visual_submit(request):
 @csrf_exempt
 def visual_delete(request):
     visual_id = request.POST.get('id')
-    if not id:
+    if not visual_id:
         msg = 'Id not found'
+    elif not visual_id.isdigit():
+        msg = 'Id is not invalid'
     else:
         visual_id = int(visual_id)
         visual = Visual.objects.get(id=visual_id)
