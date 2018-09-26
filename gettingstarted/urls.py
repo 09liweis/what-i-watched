@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^api/visual/(?P<id>\d+)', visuals.views.visual_detail, name='visual_detail'),
     url(r'^api/visual/check/(?P<douban_id>\d+)', visuals.views.check_douban_id, name='check'),
     url(r'^api/visual/submit', visuals.views.visual_submit, name='visual_submit'),
+    url(r'^api/visual/delete', visuals.views.visual_delete, name='visual_delete'),
     url(r'^api/visual/increase_episode', visuals.views.increase_episode, name='increase_episode'),
     url(r'^api/get_imdb_id', visuals.views.get_imdb_id, name='get_imdb'),
     url(r'^api/visual_update_cron', visuals.views.visual_update_cron, name='visual_update_cron'),
