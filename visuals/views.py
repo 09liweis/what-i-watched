@@ -88,6 +88,7 @@ def visual_submit(request):
     
 @csrf_exempt
 def visual_delete(request):
+    '''Delete a visual'''
     visual_id = request.POST.get('id')
     if not visual_id:
         msg = 'Id not found'
