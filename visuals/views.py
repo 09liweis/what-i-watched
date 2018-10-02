@@ -167,6 +167,7 @@ def visual_import(request):
         Visual.objects.all().delete()
     for v in visuals:
         visual = Visual.objects.create()
+        # remove id attribute
         del v['id']
         for key in v:
             setattr(visual, key, v[key])
