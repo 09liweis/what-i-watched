@@ -14,7 +14,6 @@ def index(request):
         'msg': 'Nothing is here'
     })
 
-
 def json_response(result):
     resp = JsonResponse(result)
     resp['Access-Control-Allow-Origin'] = '*'
