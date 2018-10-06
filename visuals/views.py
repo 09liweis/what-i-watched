@@ -150,6 +150,7 @@ def visual_update_cron(request):
         
         rating = decode_data['rating']['average']
         
+        #update douban rating
         visual.douban_rating = rating
         visual.save(update_fields=['douban_rating'])
     return json_response({
