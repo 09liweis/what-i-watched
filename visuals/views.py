@@ -59,7 +59,7 @@ def visual_detail(request, id):
         result = visual.json()
     except ObjectDoesNotExist:
         result = 'Visual Not Exsit'
-    return json_response({'result': result})
+    return json_response({'result': result, 'type': 'detail'})
 
 @csrf_exempt
 def visual_submit(request):
