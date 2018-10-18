@@ -142,6 +142,7 @@ def get_imdb_id(request):
     })
 
 def visual_update_cron(request):
+    '''Update all the existing visuals with latest douban rating'''
     visuals = Visual.objects.all().order_by('-date_updated')
     for visual in visuals:
         douban_id = visual.douban_id
