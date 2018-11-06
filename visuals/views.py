@@ -11,7 +11,7 @@ import re
 def index(request):
     return json_response({
         'status': 200,
-        'msg': 'Nothing is here'
+        'msg': 'Something is comming'
     })
 
 def json_response(result):
