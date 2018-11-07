@@ -3,6 +3,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 admin.autodiscover()
 
+from django.views.generic import TemplateView
 import visuals.views
 
 # Examples:
@@ -10,7 +11,8 @@ import visuals.views
 # url(r'^blog/', include('blog.urls')),
 
 urlpatterns = [
-    url(r'^$', visuals.views.index, name='index'),
+    # url(r'^$', visuals.views.index, name='index'),
+    url(r'^$', TemplateView.as_view(template_name='index.html')),
     url(r'^admin/', admin.site.urls),
     
     
