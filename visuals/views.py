@@ -9,10 +9,11 @@ import urllib3, json
 import re
 
 def index(request):
-    return json_response({
-        'status': 200,
-        'msg': 'Something is comming'
-    })
+    # return json_response({
+    #     'status': 200,
+    #     'msg': 'Something is comming'
+    # })
+    return render(request, 'index.html')
 
 def json_response(result):
     resp = JsonResponse(result)
