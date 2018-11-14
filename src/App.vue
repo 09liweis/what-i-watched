@@ -1,59 +1,46 @@
 <template>
-  <div id="app">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-  </div>
+    <div class="container">
+        <div class="languages">
+            <a v-on:click="changeLang('en')">English</a>
+            <a v-on:click="changeLang('zh')">中文</a>
+        </div>
+        <h1>{{this.$store.state.languages[this.$store.state.lang].title}}</h1>
+        <p>This page is built by Vue</p>
+        <div class="layout">
+            <router-link to="/visuals">Visuals</router-link>
+            <router-link to="/visuals/add">Add</router-link>
+            <router-view></router-view>
+        </div>
+        <MusicPlayer></MusicPlayer>
+    </div>
 </template>
-
 <script>
+import MusicPlayer from './views/MusicPlayer.vue';
 export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+    components: {
+        MusicPlayer
+    },
+    data() {
+        return {
+        };
+    },
+    methods: {
+        changeLang(lang) {
+            this.$store.commit('changeLang', lang);
+            
+        }
     }
-  }
-}
+};
 </script>
-
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style type="text/css">
+html, body{
+    background-color: rgb(236, 236, 236);
 }
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
+.container {
+    background-color: #ffffff;
+    margin: auto;
+    width: 100%;
+    max-width: 1024px;
+    padding: 20px;
 }
 </style>
