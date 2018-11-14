@@ -36,7 +36,7 @@
                         <div class="visual__progress">
                             <mu-linear-progress mode="determinate" :value="getProgress(v)"/>
                         </div>
-                        <div class="visual__action" v-if="admin">
+                        <div class="visual__action">
                             <router-link :to="{ name: 'edit', params: { id: v.id }}">Edit</router-link>
                             <a class="visual__increaseepisode" v-if="v.episodes != v.current_episode" v-on:click="increaseEpisode(v.id)">+ 1 ep</a>
                         </div>

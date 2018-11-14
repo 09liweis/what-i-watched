@@ -7,8 +7,8 @@
         <h1>{{this.$store.state.languages[this.$store.state.lang].title}}</h1>
         <p>This page is built by Vue</p>
         <div class="layout">
-            <router-link to="/visuals">Visuals</router-link>
-            <router-link to="/visuals/add">Add</router-link>
+            <router-link to="/">Visuals</router-link>
+            <router-link to="/add">Add</router-link>
             <router-view></router-view>
         </div>
         <MusicPlayer></MusicPlayer>
