@@ -1,13 +1,18 @@
-## Project Overview
+# what-i-watched
 
-Tech Statck:
-* Django
-* Postgresql
+> A Vue.js project
 
-Douban API:
-https://github.com/veryyoung/movie/blob/master/douban%20api.md
+## Build Setup
 
-Todo:
-* Move Vue front end
-* Set up CMS for adding images and songs for visuals
-* save song url from qq music: https://blog.csdn.net/hhzzcc_/article/details/79769386
+``` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+```
+
+For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
