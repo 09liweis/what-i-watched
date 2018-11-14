@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-const whatIWatched = '/';
+const whatIWatched = 'https://what-i-watched.herokuapp.com/';
 
 const state = {
     urls: [],
