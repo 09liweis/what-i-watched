@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,11 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>What I Watched</title>
+        <link rel="stylesheet" href="{% static 'visuals/muse-ui.css' %}" type="text/css" />
     </head>
     <body>
         <h1>What I Watched</h1>
         <div id="app"></div>
-        {% load staticfiles %}
         <script type="text/javascript" src="{% static 'visuals/app.min.js' %}"></script>
     </body>
 </html>
