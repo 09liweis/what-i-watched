@@ -46,7 +46,7 @@ INSTALLED_APPS = (
 MIDDLEWARE_CLASSES = (
     # Simplified static file serving.
     # https://warehouse.python.org/project/whitenoise/
-    #'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -135,12 +135,12 @@ ALLOWED_HOSTS = ['*']
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR2, 'static'),
-# )
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
-# STATIC_ROOT = os.path.join(BASE_DIR2, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
