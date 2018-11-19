@@ -22,13 +22,15 @@ def json_response(result):
 
 # visual list function
 def visuals(request):
-    offset = request.GET.get('offset')
+    page = request.GET.get('page')
     limit = request.GET.get('limit')
     # ternary operator
+    page = int(page) if page else 1
     limit = int(limit) if limit else Visual.objects.all().count()
-    offset = 0 if not offset else int(offset)
+    offset = (page - 1) * limit
+    print(offset)
     
-    visuals = Visual.objects.all().order_by('-date_updated')[offset:limit]
+    visuals = Visual.objects.all().order_by('-date_updated')[offset:offset + limit]
     results = []
     for v in visuals:
         results.append(v.json())
