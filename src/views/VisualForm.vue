@@ -131,7 +131,7 @@
                 const options = this.visual;
                 this.$http.post(this.$store.state.api.visualSubmit, options).then(res => {
                     if (res.status == 200) {
-                        this.$router.push({ path: '/visuals' });
+                        this.$router.push({ path: '/' });
                     }
                 });
             },
