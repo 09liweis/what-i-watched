@@ -85,7 +85,11 @@
                 });
             },
             getVisuals() {
-                this.$http.get(this.$store.state.api.visualList).then(res => {
+                const params = {
+                    page: 1,
+                    limit: 10
+                };
+                this.$http.get(this.$store.state.api.visualList, {params: params}).then(res => {
                     this.list = res.body.results;
                     this.loading = false;
                 });
