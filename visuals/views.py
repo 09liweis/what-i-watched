@@ -28,7 +28,6 @@ def visuals(request):
     page = int(page) if page else 1
     limit = int(limit) if limit else Visual.objects.all().count()
     offset = (page - 1) * limit
-    print(offset)
     
     visuals = Visual.objects.all().order_by('-date_updated')[offset:offset + limit]
     results = []
