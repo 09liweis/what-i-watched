@@ -28,7 +28,7 @@
                                 <img class="visual__rating icon" src="https://a4.mzstatic.com/us/r30/Purple71/v4/eb/6a/9d/eb6a9d94-4631-194c-3e24-852a06dc4ced/icon175x175.jpeg" alt="imdb icon" />
                                 <span class="visual__rating">{{v.imdb_rating}}</span>
                             </a>
-                            <a>
+                            <a v-if="v.rotten_rating">
                                 <img class="visual__rating icon" src="https://vignette.wikia.nocookie.net/greatest-movies/images/1/16/Rotten_Tomatoes_fresh_rating_icon.png/revision/latest?cb=20170918174417" alt="Rotten Tomatoes Icon" />
                                 <span class="visual__rating">{{v.rotten_rating}}</span>
                             </a>
