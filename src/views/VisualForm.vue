@@ -161,6 +161,7 @@
                         this.visual.summary = douban.summary;
                     }
                     this.visual.title = douban.title;
+                    this.visual.original_title = douban.original_title;
                     this.visual.poster = douban.images.large;
                     this.visual.douban_rating = douban.rating.average;
                     if (douban.episodes_count) {
@@ -195,7 +196,6 @@
                 };
                 this.$http.jsonp('https://www.omdbapi.com/', options).then(res => {
                     if (res.body.Response != 'False') {
-                        this.visual.original_title = res.body.Title;
                         this.visual.imdb_rating = res.body.imdbRating;
                         if (res.body.Ratings[1] && res.body.Ratings[1].Source == 'Rotten Tomatoes') {
                             this.visual.rotten_rating = res.body.Ratings[1].Value.replace('%', '');   
