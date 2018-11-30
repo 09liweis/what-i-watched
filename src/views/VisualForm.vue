@@ -117,10 +117,10 @@
                 this.searchOpen = !this.searchOpen;
             },
             gotoAddSong() {
-                this.$router.push({path: '/visuals/' + this.$route.params.id + '/song/add'});
+                this.$router.push({path: '/' + this.$route.params.id + '/song/add'});
             },
             gotoAddImage() {
-                this.$router.push({path: '/visuals/' + this.$route.params.id + '/image/add'});
+                this.$router.push({path: '/' + this.$route.params.id + '/image/add'});
             },
             renderFromSearch(id) {
                 this.toggleSearch();
