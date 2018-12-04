@@ -35,22 +35,17 @@ def visuals(request):
         results.append(v.json())
     return json_response({'results': results, 'count': len(results), 'per_page': limit, 'type': 'list'})
 
-def check_douban_id(request, douban_id):
+def check_douban_id(douban_id):
     '''
     Check if visual exists with douban id
     '''
     try:
         Visual.objects.get(douban_id=douban_id)
-        result = {
-            'msg': 'Douban Id exist',
-            'code': 'exist'
-        }
+        exist = True
+        
     except:
-        result = {
-            'msg': 'Douban Id not exist',
-            'code': 'no exist'
-        }
-    return json_response(result)
+        exist = False
+    return exist
 
 def visual_detail(request, id):
     '''
@@ -70,6 +65,14 @@ def visual_submit(request):
     '''
     id = int(request.POST.get('id'))
     kv = dict(request.POST)
+    exist = check_douban_id(kv['douban_id'])
+    if exist:
+        result = {
+            'msg': 'Douban Id exist',
+            'code': 'exist'
+        }
+        return json_response(result)
+    
     del kv['id']
     if id == 0:
         visual = Visual.objects.create()
