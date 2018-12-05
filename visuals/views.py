@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 import urllib3, json
 import re
+import time
 
 def index(request):
     # return json_response({
@@ -153,37 +154,41 @@ def visual_update_cron(request):
     visuals = Visual.objects.all().order_by('-date_updated')
     for visual in visuals:
         douban_id = visual.douban_id
-        douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
-        url_content = urllib3.PoolManager().request('GET', douban_api)
-        decode_data = json.loads(url_content.data.decode('utf-8'))
-        
-        rating = decode_data['rating']['average']
-        
-        #update douban rating
-        visual.douban_rating = rating
-        visual.save(update_fields=['douban_rating'])
+        if douban_id:
+            douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
+            url_content = urllib3.PoolManager().request('GET', douban_api)
+            decode_data = json.loads(url_content.data.decode('utf-8'))
+            
+            rating = decode_data['rating']['average']
+
+            #update douban rating
+            visual.douban_rating = rating
+            visual.save(update_fields=['douban_rating'])
+            time.sleep(5)
     return json_response({
         'status': 200
     })
 
 def visual_import(request):
     '''Import production data to development'''
-    production_api = 'https://what-i-watched.herokuapp.com/api/visuals?limit=1000'
+    production_api = 'https://what-i-watched.herokuapp.com/api/visuals'
     url_content = urllib3.PoolManager().request('GET', production_api)
     decode_data = json.loads(url_content.data.decode('utf-8'))
     visuals = decode_data['results']
     if len(visuals) > 0:
         Visual.objects.all().delete()
-    for v in visuals:
+    
+    for i in range(len(visuals) - 1, 0, -1):
+        print(i)
         visual = Visual.objects.create()
         # remove id attribute
+        v = visuals[i]
         del v['id']
         for key in v:
             setattr(visual, key, v[key])
         visual.save()
     return json_response({
-        'status': 200,
-        'visuals': visuals
+        'status': 200
     })
 
 # /api/songs?visual_id=1
