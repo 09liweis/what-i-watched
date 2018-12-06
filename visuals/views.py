@@ -67,7 +67,8 @@ def visual_submit(request):
     id = int(request.POST.get('id'))
     kv = dict(request.POST)
     
-    exist = check_douban_id(kv['douban_id'][0])
+    douban_id = kv['douban_id'][0]
+    exist = check_douban_id(douban_id)
     
     if exist:
         result = {
