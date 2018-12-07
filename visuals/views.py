@@ -158,9 +158,9 @@ def visual_update_cron(request):
         if douban_id:
             douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
             url_content = urllib3.PoolManager().request('GET', douban_api)
-            decode_data = json.loads(url_content.data.decode('utf-8'))
+            douban_data = json.loads(url_content.data.decode('utf-8'))
             
-            rating = decode_data['rating']['average']
+            rating = douban_data['rating']['average']
 
             #update douban rating
             visual.douban_rating = rating
