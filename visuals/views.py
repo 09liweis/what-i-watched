@@ -132,8 +132,8 @@ def get_imdb_id(request):
             'status': 200,
             'msg': 'Douban id not found'
         })
-    douban_url = 'https://movie.douban.com/subject/' + douban_id
-    url_content = urllib3.PoolManager().request('GET', douban_url)
+    douban_movie_url = 'https://movie.douban.com/subject/' + douban_id
+    url_content = urllib3.PoolManager().request('GET', douban_movie_url)
     decode_data = url_content.data.decode('utf-8')
     imdb_list = re.findall('href="http://www.imdb.com/title/(.*?)"', decode_data)
     # get list of release dates from webpage
