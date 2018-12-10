@@ -160,10 +160,10 @@ def visual_update_cron(request):
             url_content = urllib3.PoolManager().request('GET', douban_api)
             douban_data = json.loads(url_content.data.decode('utf-8'))
             
-            rating = douban_data['rating']['average']
+            douban_rating = douban_data['rating']['average']
 
             #update douban rating
-            visual.douban_rating = rating
+            visual.douban_rating = douban_rating
             visual.save(update_fields=['douban_rating'])
             time.sleep(5)
     return json_response({
