@@ -67,18 +67,18 @@ def visual_submit(request):
     id = int(request.POST.get('id'))
     kv = dict(request.POST)
     
-    douban_id = kv['douban_id'][0]
-    exist = check_douban_id(douban_id)
-    
-    if exist:
-        result = {
-            'msg': 'Douban Id exist',
-            'code': 'exist'
-        }
-        return json_response(result)
-    
     del kv['id']
+
     if id == 0:
+        douban_id = kv['douban_id'][0]
+        exist = check_douban_id(douban_id)
+        
+        if exist:
+            result = {
+                'msg': 'Douban Id exist',
+                'code': 'exist'
+            }
+            return json_response(result)
         visual = Visual.objects.create()
     else:
         visual = Visual.objects.get(id=id)
