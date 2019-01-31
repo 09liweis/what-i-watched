@@ -64,6 +64,7 @@ def visual_submit(request):
     '''
     funciton to add or update visual
     '''
+    print(request.POST);
     id = int(request.POST.get('id'))
     kv = dict(request.POST)
     
@@ -149,6 +150,11 @@ def get_imdb_id(request):
         'imdb_id': imdb_id,
         'release_dates': release_dates
     })
+
+@csrf_exempt
+def get_imdb_detail(request):
+    imdb_id = request.GET.get('imdb_id')
+    return json_response({'statue':'ok'})
 
 def visual_update_cron(request):
     '''Update all the existing visuals with latest douban rating'''
