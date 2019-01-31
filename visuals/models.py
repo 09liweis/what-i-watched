@@ -18,6 +18,7 @@ class Visual(models.Model):
     poster = models.TextField(blank=True)
     summary = models.TextField(blank=True)
     online_source = models.TextField(blank=True)
+    website = models.TextField(blank=True)
     episodes = models.IntegerField(blank=True, default=0)
     current_episode = models.IntegerField(blank=True, default=0)
     date_watched = models.DateTimeField(auto_now_add = True)
