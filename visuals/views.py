@@ -154,7 +154,14 @@ def get_imdb_id(request):
 @csrf_exempt
 def get_imdb_detail(request):
     imdb_id = request.GET.get('imdb_id')
-    return json_response({'statue':'ok'})
+    imdb_url = 'https://www.imdb.com/title/' + imdb_id
+    url_content = urllib3.PoolManager().request('GET', imdb_url)
+    decode_data = url_content.data.decode('utf-8');
+    imdb_rating = re.findall('<span itemprop="ratingValue">(.*?)</span>', decode_data)[0]
+    return json_response({
+        'statue': 200,
+        'imdb_rating': imdb_rating
+    })
 
 def visual_update_cron(request):
     '''Update all the existing visuals with latest douban rating'''
