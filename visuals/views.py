@@ -181,7 +181,7 @@ def visual_update_cron(request):
             visual.douban_rating = douban_rating
             visual.website = website
             visual.save(update_fields=['douban_rating','website'])
-            time.sleep(5)
+            time.sleep(10)
     return json_response({
         'status': 200
     })
