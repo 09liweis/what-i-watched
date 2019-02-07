@@ -167,21 +167,8 @@ def visual_update_cron(request):
     '''Update all the existing visuals with latest douban rating'''
     visuals = Visual.objects.all().order_by('-date_updated')
     for visual in visuals:
-        douban_id = visual.douban_id
-        if douban_id:
-            douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
-            url_content = urllib3.PoolManager().request('GET', douban_api)
-            douban_data = json.loads(url_content.data.decode('utf-8'))
-            
-            # get douban rating
-            douban_rating = douban_data['rating']['average']
-            website = douban_data['website']
-
-            #update douban rating
-            visual.douban_rating = douban_rating
-            visual.website = website
-            visual.save(update_fields=['douban_rating','website'])
-            time.sleep(10)
+        update_visual(visual)
+        time.sleep(10)
     return json_response({
         'status': 200
     })
@@ -190,6 +177,22 @@ def get_random_visual():
     '''Return random Visual'''
     visual = Visual.objects.order_by('?')
     return visual
+
+def update_visual(visual):
+    douban_id = visual.douban_id
+    if douban_id:
+        douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
+        url_content = urllib3.PoolManager().request('GET', douban_api)
+        douban_data = json.loads(url_content.data.decode('utf-8'))
+        
+        # get douban rating
+        douban_rating = douban_data['rating']['average']
+        website = douban_data['website']
+
+        #update douban rating
+        visual.douban_rating = douban_rating
+        visual.website = website
+        visual.save(update_fields=['douban_rating','website'])
 
 def visual_import(request):
     '''Import production data to development'''
