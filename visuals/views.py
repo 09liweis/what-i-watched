@@ -186,6 +186,10 @@ def visual_update_cron(request):
         'status': 200
     })
 
+def get_random_visual(request):
+    visual = Visual.objects.order_by('?')
+    return visual
+
 def visual_import(request):
     '''Import production data to development'''
     production_api = 'https://what-i-watched.herokuapp.com/api/visuals'
