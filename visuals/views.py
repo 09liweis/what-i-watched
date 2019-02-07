@@ -165,17 +165,24 @@ def get_imdb_detail(request):
 
 def visual_update_cron(request):
     '''Update all the existing visuals with latest douban rating'''
-    visuals = Visual.objects.all().order_by('-date_updated')
-    for visual in visuals:
-        update_visual(visual)
-        time.sleep(10)
-    return json_response({
-        'status': 200
-    })
+    t = request.GET.get('type')
+    if t == 'random':
+        visual = get_random_visual()
+        return json_response({
+            'result': visual.json()
+        })
+    else:
+        visuals = Visual.objects.all().order_by('-date_updated')
+        for visual in visuals:
+            update_visual(visual)
+            time.sleep(10)
+        return json_response({
+            'status': 200
+        })
 
 def get_random_visual():
     '''Return random Visual'''
-    visual = Visual.objects.order_by('?')
+    visual = Visual.objects.order_by('?')[0]
     return visual
 
 def update_visual(visual):
