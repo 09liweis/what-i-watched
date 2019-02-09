@@ -168,6 +168,7 @@ def visual_update_cron(request):
     t = request.GET.get('type')
     if t == 'random':
         visual = get_random_visual()
+        visual = update_visual(visual)
         return json_response({
             'result': visual.json()
         })
@@ -200,6 +201,7 @@ def update_visual(visual):
         visual.douban_rating = douban_rating
         visual.website = website
         visual.save(update_fields=['douban_rating','website'])
+        return visual
 
 def visual_import(request):
     '''Import production data to development'''
