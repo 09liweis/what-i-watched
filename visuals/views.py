@@ -198,10 +198,12 @@ def update_visual(visual):
         # get douban rating
         douban_rating = douban_data['rating']['average']
         website = douban_data['website']
+        release_date = douban_data['pubdate']
 
         #update douban rating
         visual.douban_rating = douban_rating
         visual.website = website
+        visual.release_date = release_date
         visual.save(update_fields=['douban_rating','website'])
         return visual
 
