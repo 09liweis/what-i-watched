@@ -199,11 +199,14 @@ def update_visual(visual):
         douban_rating = douban_data['rating']['average']
         website = douban_data['website']
         release_date = douban_data['pubdate']
+        episodes = douban_data['episodes_count']
 
         #update douban rating
         visual.douban_rating = douban_rating
         visual.website = website
         visual.release_date = release_date
+        if episodes:
+            visual.episodes = episodes
         visual.save(update_fields=['douban_rating','website','release_date'])
         return visual
 
