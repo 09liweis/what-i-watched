@@ -155,14 +155,18 @@ def get_imdb_id(request):
 def get_imdb_detail(request):
     '''Get imdb detail with imdb id'''
     imdb_id = request.GET.get('imdb_id')
-    imdb_url = 'https://www.imdb.com/title/' + imdb_id
-    url_content = urllib3.PoolManager().request('GET', imdb_url)
-    decode_data = url_content.data.decode('utf-8');
-    imdb_rating = re.findall('<span itemprop="ratingValue">(.*?)</span>', decode_data)[0]
+    imdb_rating = get_imdb_rating(imdb_id)
     return json_response({
         'statue': 200,
         'imdb_rating': imdb_rating
     })
+
+def get_imdb_rating(imdb_id):
+    imdb_url = 'https://www.imdb.com/title/' + imdb_id
+    url_content = urllib3.PoolManager().request('GET', imdb_url)
+    decode_data = url_content.data.decode('utf-8');
+    imdb_rating = re.findall('<span itemprop="ratingValue">(.*?)</span>', decode_data)[0]
+    return imdb_rating
 
 def visual_update_cron(request):
     '''Update all the existing visuals with latest douban rating'''
@@ -200,6 +204,9 @@ def update_visual(visual):
         website = douban_data['website']
         release_date = douban_data['pubdate']
         episodes = douban_data['episodes_count']
+        if visual.imdb_id:
+            imdb_rating = get_imdb_rating(visual.imdb_id)
+            visual.imdb_rating = imdb_rating
 
         #update douban rating
         visual.douban_rating = douban_rating
