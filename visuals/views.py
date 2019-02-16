@@ -214,7 +214,7 @@ def update_visual(visual):
         visual.release_date = release_date
         if episodes:
             visual.episodes = episodes
-        visual.save(update_fields=['douban_rating','website','release_date'])
+        visual.save(update_fields=['douban_rating','website','release_date','imdb_rating'])
         return visual
 
 def visual_import(request):
