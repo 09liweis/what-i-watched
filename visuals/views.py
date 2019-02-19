@@ -204,6 +204,7 @@ def update_visual(visual):
         website = douban_data['website']
         release_date = douban_data['pubdate']
         episodes = douban_data['episodes_count']
+        title = douban_data['title']
         original_title = douban_data['original_title']
         if visual.imdb_id:
             imdb_rating = get_imdb_rating(visual.imdb_id)
@@ -213,10 +214,11 @@ def update_visual(visual):
         visual.douban_rating = douban_rating
         visual.website = website
         visual.original_title = original_title
+        visual.title = title
         visual.release_date = release_date
         if episodes:
             visual.episodes = episodes
-        visual.save(update_fields=['douban_rating','website','release_date','imdb_rating','episodes','original_title'])
+        visual.save(update_fields=['douban_rating','website','release_date','imdb_rating','episodes','original_title','title'])
         return visual
 
 def visual_import(request):
