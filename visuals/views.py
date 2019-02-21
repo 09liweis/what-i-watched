@@ -27,14 +27,22 @@ def visuals(request):
     limit = request.GET.get('limit')
     # ternary operator
     page = int(page) if page else 1
-    limit = int(limit) if limit else Visual.objects.all().count()
+    limit = int(limit) if limit else 20
     offset = (page - 1) * limit
     
     visuals = Visual.objects.all().order_by('-date_updated')[offset:offset + limit]
     results = []
     for v in visuals:
         results.append(v.json())
-    return json_response({'results': results, 'count': len(results), 'per_page': limit, 'type': 'list'})
+    return json_response(
+        {
+            'results': results,
+            'total': Visual.objects.all().count(),
+            'per_page': limit,
+            'type': 'list',
+            'page': page
+        }
+    )
 
 def check_douban_id(douban_id):
     '''
