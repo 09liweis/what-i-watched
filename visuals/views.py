@@ -25,9 +25,10 @@ def json_response(result):
 def visuals(request):
     page = request.GET.get('page')
     limit = request.GET.get('limit')
+    total = Visual.objects.all().count()
     # ternary operator
     page = int(page) if page else 1
-    limit = int(limit) if limit else 20
+    limit = int(limit) if limit else total
     offset = (page - 1) * limit
     
     visuals = Visual.objects.all().order_by('-date_updated')[offset:offset + limit]
@@ -37,7 +38,7 @@ def visuals(request):
     return json_response(
         {
             'results': results,
-            'total': Visual.objects.all().count(),
+            'total': total,
             'per_page': limit,
             'type': 'list',
             'page': page
