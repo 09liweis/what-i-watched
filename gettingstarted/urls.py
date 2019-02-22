@@ -17,7 +17,7 @@ urlpatterns = [
     
     
     url(r'^api/visuals', visuals.views.visuals, name='visuals'),
-    url(r'^api/visuals/search', visuals.views.visual_search, name='visual_search'),
+    url(r'^api/search', visuals.views.visual_search, name='visual_search'),
     url(r'^api/visual/(?P<id>\d+)', visuals.views.visual_detail, name='visual_detail'),
     url(r'^api/visual/submit', visuals.views.visual_submit, name='visual_submit'),
     url(r'^api/visual/delete', visuals.views.visual_delete, name='visual_delete'),
