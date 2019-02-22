@@ -45,6 +45,10 @@ def visuals(request):
         }
     )
 
+def visual_search(request):
+    keyword = request.GET.get('keyword')
+    return
+
 def check_douban_id(douban_id):
     '''
     Check if visual exists with douban id
