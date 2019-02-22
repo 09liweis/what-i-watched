@@ -47,7 +47,15 @@ def visuals(request):
 
 def visual_search(request):
     keyword = request.GET.get('keyword')
-    return
+    results = []
+    if keyword:
+        visuals = Visual.objects.filter(title__icontains=keyword)
+        for v in visuals:
+            results.append(v.json())
+    return json_response({
+        'results': results,
+        'keyword': keyword
+    })
 
 def check_douban_id(douban_id):
     '''
