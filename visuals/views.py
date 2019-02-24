@@ -46,6 +46,7 @@ def visuals(request):
     )
 
 def visual_search(request):
+    '''Function to search keyword for visuals'''
     keyword = request.GET.get('keyword')
     results = []
     if keyword:
