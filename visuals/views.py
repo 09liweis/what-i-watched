@@ -33,6 +33,10 @@ def visuals(request):
     
     visuals = Visual.objects.all().order_by('-date_updated')[offset:offset + limit]
     results = []
+    statics = {
+        'movie': 0,
+        'tv': 0
+    }
     for v in visuals:
         results.append(v.json())
     return json_response(
@@ -41,7 +45,8 @@ def visuals(request):
             'total': total,
             'per_page': limit,
             'type': 'list',
-            'page': page
+            'page': page,
+            'statics': statics
         }
     )
 
