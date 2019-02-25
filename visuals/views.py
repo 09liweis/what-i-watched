@@ -38,6 +38,10 @@ def visuals(request):
         'tv': 0
     }
     for v in visuals:
+        if v.visual_type == 'movie':
+            statics['movie'] += 1
+        else:
+            statics['tv'] += 1
         results.append(v.json())
     return json_response(
         {
