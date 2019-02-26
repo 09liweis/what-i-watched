@@ -246,7 +246,8 @@ def update_visual(visual):
         visual.website = website
         visual.original_title = original_title
         visual.title = title
-        visual.release_date = release_date
+        if release_date:
+            visual.release_date = release_date
         if episodes:
             visual.episodes = episodes
         visual.save(update_fields=['douban_rating','website','release_date','imdb_rating','episodes','original_title','title'])
