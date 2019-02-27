@@ -242,7 +242,8 @@ def update_visual(visual):
             visual.imdb_rating = imdb_rating
 
         #update douban rating
-        visual.douban_rating = douban_rating
+        if douban_rating:
+            visual.douban_rating = douban_rating
         visual.website = website
         visual.original_title = original_title
         visual.title = title
