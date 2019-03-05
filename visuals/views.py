@@ -43,6 +43,14 @@ def visuals(request):
             statics['movie'] += 1
         else:
             statics['tv'] += 1
+            
+        release_date = v.release_date
+        if release_date:
+            year = release_date[0:4]
+            if year in statics['years']:
+                statics['years'][year] += 1
+            else:
+                statics['years'][year] = 1
         results.append(v.json())
     return json_response(
         {
