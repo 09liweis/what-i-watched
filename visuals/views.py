@@ -35,7 +35,8 @@ def visuals(request):
     results = []
     statics = {
         'movie': 0,
-        'tv': 0
+        'tv': 0,
+        'years':{}
     }
     for v in visuals:
         if v.visual_type == 'movie':
