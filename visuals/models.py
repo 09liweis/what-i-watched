@@ -47,6 +47,7 @@ class Visual(models.Model):
             'rotten_rating': self.rotten_rating,
             'rotten_audience_rating': self.rotten_audience_rating,
             'release_date': self.release_date,
+            'air_day': self.air_day,
             'poster': self.poster,
             'summary': self.summary,
             'online_source': self.online_source,
