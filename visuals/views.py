@@ -247,7 +247,6 @@ def update_visual(visual):
         if release_date == '':
             release_date = douban_data['pubdates'][0]
             release_date = release_date[0:10]
-            print(release_date)
         episodes = douban_data['episodes_count']
         title = douban_data['title']
         original_title = douban_data['original_title']
