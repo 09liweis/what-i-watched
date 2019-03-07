@@ -179,8 +179,7 @@ def get_imdb_id(request):
             'msg': 'Douban id not found'
         })
     douban_movie_url = 'https://movie.douban.com/subject/' + douban_id
-    url_content = urllib3.PoolManager().request('GET', douban_movie_url)
-    decode_data = url_content.data.decode('utf-8')
+    decode_data = get_content_from_url(douban_movie_url)
     imdb_list = re.findall('href="http://www.imdb.com/title/(.*?)"', decode_data)
     # get list of release dates from webpage
     release_dates = re.findall(r'[0-9]{4}-[0-9]{2}-[0-9]{2}\([\u4e00-\u9fff]+\)', decode_data)
@@ -209,8 +208,7 @@ def get_imdb_detail(request):
 def get_imdb_rating(imdb_id):
     '''Get imdb rating with imdb id from imdb website'''
     imdb_url = 'https://www.imdb.com/title/' + imdb_id
-    url_content = urllib3.PoolManager().request('GET', imdb_url)
-    decode_data = url_content.data.decode('utf-8');
+    decode_data = get_content_from_url(imdb_url)
     imdb_rating = re.findall('<span itemprop="ratingValue">(.*?)</span>', decode_data)[0]
     return imdb_rating
 
@@ -278,8 +276,7 @@ def update_visual(visual):
 def visual_import(request):
     '''Import production data to development'''
     production_api = 'https://what-i-watched.herokuapp.com/api/visuals'
-    url_content = urllib3.PoolManager().request('GET', production_api)
-    decode_data = json.loads(url_content.data.decode('utf-8'))
+    decode_data = json.loads(get_content_from_url(production_api))
     visuals = decode_data['results']
     if len(visuals) > 0:
         Visual.objects.all().delete()
