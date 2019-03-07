@@ -9,6 +9,11 @@ import urllib3, json
 import re
 import time
 
+def get_content_from_url(url):
+    url_content = urllib3.PoolManager().request('GET', url)
+    decode_data = url_content.data.decode('utf-8')
+    return decode_data
+
 def index(request):
     # return json_response({
     #     'status': 200,
