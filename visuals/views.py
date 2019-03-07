@@ -243,6 +243,7 @@ def update_visual(visual):
         # get douban rating
         douban_rating = douban_data['rating']['average']
         website = douban_data['website']
+
         release_date = douban_data['pubdate']
         if release_date == '':
             release_date = douban_data['pubdates'][0]
@@ -252,7 +253,9 @@ def update_visual(visual):
         original_title = douban_data['original_title']
         if visual.imdb_id:
             imdb_rating = get_imdb_rating(visual.imdb_id)
-            visual.imdb_rating = imdb_rating
+            # in case imdb update the html class name
+            if imdb_rating:
+                visual.imdb_rating = imdb_rating
 
         #update douban rating
         if douban_rating:
