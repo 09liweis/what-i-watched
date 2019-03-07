@@ -15,11 +15,11 @@ def get_content_from_url(url):
     return decode_data
 
 def index(request):
-    # return json_response({
-    #     'status': 200,
-    #     'msg': 'Something is comming'
-    # })
-    return render(request, 'index.html')
+    return json_response({
+        'status': 200,
+        'msg': 'Something is comming'
+    })
+    # return render(request, 'index.html')
 
 def json_response(result):
     resp = JsonResponse(result)
