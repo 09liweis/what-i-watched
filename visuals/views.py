@@ -138,6 +138,7 @@ def visual_submit(request):
             value = int(value)
         setattr(visual, key, value)
     visual.save()
+    update_visual(visual)
     return json_response({'status': 200})
     
 @csrf_exempt
