@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from visuals.models import Visual, Song, VisualImage
+from visuals.models import Visual, Song, VisualImage, Country
 from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
@@ -212,6 +212,7 @@ def get_imdb_rating(imdb_id):
     '''Get imdb rating with imdb id from imdb website'''
     imdb_url = 'https://www.imdb.com/title/' + imdb_id
     decode_data = get_content_from_url(imdb_url)
+    ##TODO handle imdb rating not found
     imdb_rating = re.findall('<span itemprop="ratingValue">(.*?)</span>', decode_data)[0]
     return imdb_rating
 
@@ -252,6 +253,11 @@ def update_visual(visual):
         douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
         url_content = urllib3.PoolManager().request('GET', douban_api)
         douban_data = json.loads(url_content.data.decode('utf-8'))
+        
+        #country
+        countries = douban_data['countries']
+        for c in countries:
+            print(c)
         
         # get douban rating
         douban_rating = douban_data['rating']['average']
