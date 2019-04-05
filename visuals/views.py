@@ -257,7 +257,14 @@ def update_visual(visual):
         #country
         countries = douban_data['countries']
         for c in countries:
-            print(c)
+            try:
+                country = Country.objects.get(title_zh=c)
+            except:
+                country = Country.objects.create()
+                country.title_zh = c
+                country.save()
+            if country not in visual.country_set.all():
+                country.visuals.add(visual)
         
         # get douban rating
         douban_rating = douban_data['rating']['average']
