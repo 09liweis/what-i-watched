@@ -392,3 +392,10 @@ def image_submit(request):
     image.save()
     result = {'result': 200}
     return json_response(result)
+    
+def countries(request):
+    countries = Country.objects.all()
+    result = []
+    for c in countries:
+        result.append(c.title_zh)
+    return json_response({'status': 200, 'result':result})
