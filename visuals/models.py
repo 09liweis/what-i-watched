@@ -35,6 +35,10 @@ class Visual(models.Model):
         ordering = ['-date_updated']
     
     def json(self):
+        countries = self.country_set.all()
+        cs = []
+        for c in countries:
+            cs.append(c.title_zh)
         return {
             'id': self.id,
             'title': self.title,
@@ -56,7 +60,8 @@ class Visual(models.Model):
             'visual_type': self.visual_type,
             'website': self.website,
             'date_watched': self.date_watched,
-            'date_updated': self.date_updated
+            'date_updated': self.date_updated,
+            'countries': cs
         }
     
     def increase_episode(self):
