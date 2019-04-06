@@ -399,3 +399,7 @@ def countries(request):
     for c in countries:
         result.append(c.title_zh)
     return json_response({'status': 200, 'result':result})
+    
+def connectVC(visual, countries):
+    ''''''
+    pass
