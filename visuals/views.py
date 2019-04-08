@@ -251,7 +251,13 @@ def update_visual(visual):
     '''Return the updated visual'''
     douban_id = visual.douban_id
     imdb_id = visual.imdb_id
-        
+    if imdb_id:
+        imdb_api = 'https://www.omdbapi.com/?apikey=6ad10fa5&i=' + imdb_id
+        url_content = urllib3.PoolManager().request('GET',imdb_api)
+        imdb_data = json.loads(url_content.data.decode('utf-8'))
+        # print(imdb_api)
+        if 'Website' in imdb_data:
+            website = imdb_data['Website']
     if douban_id:
         douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
         url_content = urllib3.PoolManager().request('GET', douban_api)
