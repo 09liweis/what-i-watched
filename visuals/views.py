@@ -249,19 +249,19 @@ def get_random_visual():
 
 def update_visual(visual):
     '''Return the updated visual'''
-    douban_id = visual.douban_id
+    website = ''
     imdb_id = visual.imdb_id
     if imdb_id:
         imdb_api = 'https://www.omdbapi.com/?apikey=6ad10fa5&i=' + imdb_id
-        url_content = urllib3.PoolManager().request('GET',imdb_api)
-        imdb_data = json.loads(url_content.data.decode('utf-8'))
-        # print(imdb_api)
-        if 'Website' in imdb_data:
+        imdb_data = json.loads(get_content_from_url(imdb_api))
+        print(imdb_api)
+        if 'Website' in imdb_data and imdb_data['Website'] != 'N/A':
             website = imdb_data['Website']
+            print(website)
+    douban_id = visual.douban_id
     if douban_id:
         douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
-        url_content = urllib3.PoolManager().request('GET', douban_api)
-        douban_data = json.loads(url_content.data.decode('utf-8'))
+        douban_data = json.loads(get_content_from_url(douban_api))
         
         #country
         countries = douban_data['countries']
@@ -269,7 +269,8 @@ def update_visual(visual):
         
         # get douban rating
         douban_rating = douban_data['rating']['average']
-        website = douban_data['website']
+        if not website:
+            website = douban_data['website']
 
         # release_date = douban_data['pubdate']
         # if release_date == '':
