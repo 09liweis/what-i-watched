@@ -257,7 +257,11 @@ def update_visual(visual):
         print(imdb_api)
         if 'Website' in imdb_data and imdb_data['Website'] != 'N/A':
             website = imdb_data['Website']
-            print(website)
+        if 'Ratings' in imdb_data:
+            ratings = imdb_data['Ratings']
+            for rating in ratings:
+                if rating['Source'] == 'Rotten Tomatoes':
+                    visual.rotten_rating = int(rating['Value'].replace('%',''))
     douban_id = visual.douban_id
     if douban_id:
         douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
