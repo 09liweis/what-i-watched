@@ -250,6 +250,8 @@ def get_random_visual():
 def update_visual(visual):
     '''Return the updated visual'''
     douban_id = visual.douban_id
+    imdb_id = visual.imdb_id
+        
     if douban_id:
         douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
         url_content = urllib3.PoolManager().request('GET', douban_api)
@@ -279,7 +281,8 @@ def update_visual(visual):
         #update douban rating
         if douban_rating:
             visual.douban_rating = douban_rating
-        visual.website = website
+        if website:
+            visual.website = website
         visual.original_title = original_title
         visual.title = title
         # if release_date:
