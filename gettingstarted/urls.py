@@ -34,5 +34,7 @@ urlpatterns = [
     url(r'^api/images', visuals.views.images, name='images'),
     url(r'^api/image/submit', visuals.views.image_submit, name='image_submit'),
     
-    url(r'^api/countries', visuals.views.countries, name='countries')
+    url(r'^api/countries', visuals.views.countries, name='countries'),
+    
+    url(r'^api/stats', visuals.views.stats, name='stats')
 ]

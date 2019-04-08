@@ -26,18 +26,8 @@ def json_response(result):
     resp['Access-Control-Allow-Origin'] = '*'
     return resp
 
-# visual list function
-def visuals(request):
-    page = request.GET.get('page')
-    limit = request.GET.get('limit')
-    total = Visual.objects.all().count()
-    # ternary operator
-    page = int(page) if page else 1
-    limit = int(limit) if limit else total
-    offset = (page - 1) * limit
-    
-    visuals = Visual.objects.all().order_by('-date_updated')[offset:offset + limit]
-    results = []
+def stats(request):
+    visuals = Visual.objects.all()
     statics = {
         'movie': 0,
         'tv': 0,
@@ -56,6 +46,21 @@ def visuals(request):
                 statics['years'][year] += 1
             else:
                 statics['years'][year] = 1
+    return json_response(statics)
+
+# visual list function
+def visuals(request):
+    page = request.GET.get('page')
+    limit = request.GET.get('limit')
+    total = Visual.objects.all().count()
+    # ternary operator
+    page = int(page) if page else 1
+    limit = int(limit) if limit else total
+    offset = (page - 1) * limit
+    
+    visuals = Visual.objects.all().order_by('-date_updated')[offset:offset + limit]
+    results = []
+    for v in visuals:
         results.append(v.json())
     return json_response(
         {
@@ -64,7 +69,6 @@ def visuals(request):
             'per_page': limit,
             'type': 'list',
             'page': page,
-            'statics': statics
         }
     )
 
