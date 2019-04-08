@@ -141,6 +141,7 @@ def visual_submit(request):
         visual.save()
     else:
         visual.save(update_fields=['douban_rating','website','release_date','imdb_rating','episodes','original_title','title','poster'])
+    update_visual(visual)
     return json_response({'status': 200})
     
 @csrf_exempt
