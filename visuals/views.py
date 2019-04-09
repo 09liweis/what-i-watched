@@ -31,13 +31,21 @@ def stats(request):
     statics = {
         'movie': 0,
         'tv': 0,
-        'years':{}
+        'years':{},
+        'countries':{}
     }
     for v in visuals:
         if v.visual_type == 'movie':
             statics['movie'] += 1
         else:
             statics['tv'] += 1
+        
+        countries = v.country_set.all()
+        for c in countries:
+            if c in statics['countries']:
+                statics['countries'][c.title_zh] += 1
+            else:
+                statics['countries'][c.title_zh] = 1
             
         release_date = v.release_date
         if release_date:
