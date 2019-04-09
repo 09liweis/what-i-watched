@@ -42,10 +42,11 @@ def stats(request):
         
         countries = v.country_set.all()
         for c in countries:
-            if c in statics['countries']:
-                statics['countries'][c.title_zh] += 1
+            title_zh = c.title_zh
+            if title_zh in statics['countries']:
+                statics['countries'][title_zh] += 1
             else:
-                statics['countries'][c.title_zh] = 1
+                statics['countries'][title_zh] = 1
             
         release_date = v.release_date
         if release_date:
