@@ -59,8 +59,6 @@ class Visual(models.Model):
             'current_episode': self.current_episode,
             'visual_type': self.visual_type,
             'website': self.website,
-            'date_watched': self.date_watched,
-            'date_updated': self.date_updated,
             'countries': cs
         }
     
