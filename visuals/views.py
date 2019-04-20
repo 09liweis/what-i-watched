@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from visuals.models import Visual, Song, VisualImage, Country
+from visuals.models import Visual, Song, VisualImage, Country, Language
 from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
@@ -278,11 +278,16 @@ def update_visual(visual):
     douban_id = visual.douban_id
     if douban_id:
         douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
+        print(douban_api)
         douban_data = json.loads(get_content_from_url(douban_api))
         
         #country
         countries = douban_data['countries']
         connectVC(visual, countries)
+        
+        #language
+        languages = douban_data['languages']
+        connectVL(visual, languages)
         
         # get douban rating
         douban_rating = douban_data['rating']['average']
@@ -432,3 +437,14 @@ def connectVC(visual, countries):
             country.save()
         if country not in visual.country_set.all():
             country.visuals.add(visual)
+
+def connectVL(visual, languages):
+    for lang in languages:
+        try:
+            l = Language.objects.get(title_zh=lang)
+        except:
+            l = Language.objects.create()
+            l.title_zh = lang
+            l.save()
+        if l not in visual.language_set.all():
+            l.visuals.add(visual)
