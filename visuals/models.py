@@ -39,6 +39,10 @@ class Visual(models.Model):
         cs = []
         for c in countries:
             cs.append(c.title_zh)
+        languages = self.language_set.all()
+        ls = []
+        for l in languages:
+            ls.append(l.title_zh)
         return {
             'id': self.id,
             'title': self.title,
@@ -59,7 +63,8 @@ class Visual(models.Model):
             'current_episode': self.current_episode,
             'visual_type': self.visual_type,
             'website': self.website,
-            'countries': cs
+            'countries': cs,
+            'languages': ls
         }
     
     def increase_episode(self):
@@ -68,6 +73,17 @@ class Visual(models.Model):
             self.save(update_fields=['current_episode', 'date_updated'])
 
 class Country(models.Model):
+    title = models.TextField(blank=True)
+    title_zh = models.TextField(blank=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+    visuals = models.ManyToManyField(Visual)
+    def __str__(self):
+        return self.title_zh
+    class Meta:
+        ordering = ('date_updated',)
+
+class Language(models.Model):
     title = models.TextField(blank=True)
     title_zh = models.TextField(blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
