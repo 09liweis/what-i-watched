@@ -280,6 +280,16 @@ def update_visual(visual):
         print(douban_api)
         douban_data = json.loads(get_content_from_url(douban_api))
         
+        durations = douban_data['durations']
+        print(durations)
+        if durations:
+            durations = durations[0]
+            duration = ''
+            for s in durations:
+                if s.isdigit():
+                    duration += s
+            visual.duration = duration
+        
         #country
         countries = douban_data['countries']
         connectVC(visual, countries)
