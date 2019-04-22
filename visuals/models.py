@@ -16,6 +16,7 @@ class Visual(models.Model):
     rotten_audience_rating = models.IntegerField(blank=True, default=0)
     release_date = models.TextField(blank=True)
     air_day = models.TextField(blank=True)
+    duration = models.TextField(blank=True)
     poster = models.TextField(blank=True)
     summary = models.TextField(blank=True)
     online_source = models.TextField(blank=True)
@@ -63,6 +64,7 @@ class Visual(models.Model):
             'current_episode': self.current_episode,
             'visual_type': self.visual_type,
             'website': self.website,
+            'duration': self.duration,
             'countries': cs,
             'languages': ls
         }
