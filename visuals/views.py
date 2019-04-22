@@ -281,7 +281,7 @@ def update_visual(visual):
         douban_data = json.loads(get_content_from_url(douban_api))
         
         durations = douban_data['durations']
-        print(durations)
+
         if durations:
             durations = durations[0]
             duration = ''
