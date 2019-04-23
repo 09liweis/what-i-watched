@@ -32,7 +32,8 @@ def stats(request):
         'movie': 0,
         'tv': 0,
         'years':{},
-        'countries':{}
+        'countries':{},
+        'languages':{}
     }
     for v in visuals:
         if v.visual_type == 'movie':
@@ -47,6 +48,14 @@ def stats(request):
                 statics['countries'][title_zh] += 1
             else:
                 statics['countries'][title_zh] = 1
+        
+        languages = v.language_set.all()
+        for l in languages:
+                title_zh = l.title_zh
+                if title_zh in statics['languages']:
+                    statics['languages'][title_zh] += 1
+                else:
+                    statics['languages'][title_zh] = 1
             
         release_date = v.release_date
         if release_date:
@@ -67,7 +76,7 @@ def visuals(request):
     limit = int(limit) if limit else total
     offset = (page - 1) * limit
     
-    visuals = Visual.objects.all().order_by('-date_updated')[offset:offset + limit]
+    visuals = Visual.objects.filter().order_by('-date_updated')[offset:offset + limit]
     results = []
     for v in visuals:
         results.append(v.json())
