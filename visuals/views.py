@@ -264,6 +264,10 @@ def visual_update_cron(request):
             'status': 200
         })
 
+def random_visual(request):
+    visual = get_random_visual()
+    return json_response({'status':200,'result':visual.json()})
+
 def get_random_visual():
     '''Return random Visual'''
     visual = Visual.objects.order_by('?')[0]
