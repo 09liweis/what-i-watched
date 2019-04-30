@@ -289,6 +289,7 @@ def update_visual(visual):
     imdb_id = visual.imdb_id
     if not imdb_id:
         imdb_id = get_imdb_id_from_douban(douban_id)
+        visual.imdb_id = imdb_id
     imdb_api = 'https://www.omdbapi.com/?apikey=6ad10fa5&i=' + imdb_id
     imdb_data = json.loads(get_content_from_url(imdb_api))
     if 'Website' in imdb_data and imdb_data['Website'] != 'N/A':
