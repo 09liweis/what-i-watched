@@ -162,7 +162,7 @@ def visual_submit(request):
     if id == 0:
         visual.save()
     else:
-        visual.save(update_fields=['douban_rating','website','release_date','imdb_rating','episodes','original_title','title','poster'])
+        visual.save(update_fields=['imdb_id','current_episode','douban_rating','website','release_date','imdb_rating','episodes','original_title','title','poster'])
     # update_visual(visual)
     return json_response({'status': 200})
     
