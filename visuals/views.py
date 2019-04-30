@@ -221,6 +221,15 @@ def get_imdb_id(request):
         'release_dates': release_dates
     })
 
+def get_imdb_id_from_douban(douban_id):
+    douban_movie_url = 'https://movie.douban.com/subject/' + douban_id
+    decode_data = get_content_from_url(douban_movie_url)
+    imdb_list = re.findall('href="http://www.imdb.com/title/(.*?)"', decode_data)
+    imdb_id = ''
+    if len(imdb_list) > 0:
+        imdb_id = imdb_list[0]
+    return imdb_id
+
 @csrf_exempt
 def get_imdb_detail(request):
     '''Get imdb detail with imdb id'''
@@ -275,19 +284,21 @@ def get_random_visual():
 
 def update_visual(visual):
     '''Return the updated visual'''
+    douban_id = visual.douban_id
     website = ''
     imdb_id = visual.imdb_id
-    if imdb_id:
-        imdb_api = 'https://www.omdbapi.com/?apikey=6ad10fa5&i=' + imdb_id
-        imdb_data = json.loads(get_content_from_url(imdb_api))
-        if 'Website' in imdb_data and imdb_data['Website'] != 'N/A':
-            website = imdb_data['Website']
-        if 'Ratings' in imdb_data:
-            ratings = imdb_data['Ratings']
-            for rating in ratings:
-                if rating['Source'] == 'Rotten Tomatoes':
-                    visual.rotten_rating = int(rating['Value'].replace('%',''))
-    douban_id = visual.douban_id
+    if not imdb_id:
+        imdb_id = get_imdb_id_from_douban(douban_id)
+    imdb_api = 'https://www.omdbapi.com/?apikey=6ad10fa5&i=' + imdb_id
+    imdb_data = json.loads(get_content_from_url(imdb_api))
+    if 'Website' in imdb_data and imdb_data['Website'] != 'N/A':
+        website = imdb_data['Website']
+    if 'Ratings' in imdb_data:
+        ratings = imdb_data['Ratings']
+        for rating in ratings:
+            if rating['Source'] == 'Rotten Tomatoes':
+                visual.rotten_rating = int(rating['Value'].replace('%',''))
+
     if douban_id:
         douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
         print(douban_api)
