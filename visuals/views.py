@@ -161,9 +161,7 @@ def visual_submit(request):
         setattr(visual, key, value)
     if id == 0:
         visual.save()
-    else:
-        visual.save(update_fields=['imdb_id','current_episode','douban_rating','website','release_date','imdb_rating','episodes','original_title','title','poster'])
-    # update_visual(visual)
+    update_visual(visual)
     return json_response({'status': 200})
     
 @csrf_exempt
@@ -352,7 +350,7 @@ def update_visual(visual):
         #     visual.release_date = release_date
         if episodes:
             visual.episodes = episodes
-        visual.save(update_fields=['douban_rating','website','imdb_rating','episodes','original_title','title','imdb_id','duration'])
+        visual.save(update_fields=['imdb_id','current_episode','douban_rating','website','release_date','imdb_rating','episodes','original_title','title','poster'])
         return visual
 
 def visual_import(request):
