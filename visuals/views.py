@@ -350,7 +350,7 @@ def update_visual(visual):
         #     visual.release_date = release_date
         if episodes:
             visual.episodes = episodes
-        visual.save(update_fields=['imdb_id','current_episode','douban_rating','website','release_date','imdb_rating','episodes','original_title','title','poster'])
+        visual.save(update_fields=['duration','imdb_id','current_episode','douban_rating','website','release_date','imdb_rating','episodes','original_title','title','poster'])
         return visual
 
 def visual_import(request):
