@@ -242,8 +242,10 @@ def get_imdb_rating(imdb_id):
     '''Get imdb rating with imdb id from imdb website'''
     imdb_url = 'https://www.imdb.com/title/' + imdb_id
     decode_data = get_content_from_url(imdb_url)
-    ##TODO handle imdb rating not found
-    imdb_rating = re.findall('<span itemprop="ratingValue">(.*?)</span>', decode_data)[0]
+    imdb_rating_array = re.findall('<span itemprop="ratingValue">(.*?)</span>', decode_data)
+    imdb_rating = ''
+    if len(imdb_rating_array) > 0:
+        imdb_rating = imdb_rating_array[0]
     return imdb_rating
 
 def visual_update_cron(request):
