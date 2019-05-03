@@ -252,18 +252,15 @@ def visual_update_cron(request):
     '''Update all the existing visuals with latest douban info or imdb info'''
     t = request.GET.get('type')
     id = request.GET.get('id')
-    if t == 'random':
-        visual = get_random_visual()
+    if t or id:
+        if t == 'random':
+            visual = get_random_visual()
+        if id:
+            visual = Visual.objects.get(id=id)
         visual = update_visual(visual)
         return json_response({
             'result': visual.json()
         })
-    if id:
-        visual = Visual.objects.get(id=id)
-        visual = update_visual(visual)
-        return json_response(({
-            'result': visual.json()
-        }))
     else:
         visuals = Visual.objects.all().order_by('-date_updated')
         for visual in visuals:
