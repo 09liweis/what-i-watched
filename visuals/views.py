@@ -287,15 +287,18 @@ def update_visual(visual):
     if not imdb_id:
         imdb_id = get_imdb_id_from_douban(douban_id)
         visual.imdb_id = imdb_id
-    imdb_api = 'https://www.omdbapi.com/?apikey=6ad10fa5&i=' + imdb_id
-    imdb_data = json.loads(get_content_from_url(imdb_api))
-    if 'Website' in imdb_data and imdb_data['Website'] != 'N/A':
-        website = imdb_data['Website']
-    if 'Ratings' in imdb_data:
-        ratings = imdb_data['Ratings']
-        for rating in ratings:
-            if rating['Source'] == 'Rotten Tomatoes':
-                visual.rotten_rating = int(rating['Value'].replace('%',''))
+    try:
+        imdb_api = 'https://www.omdbapi.com/?apikey=6ad10fa5&i=' + imdb_id
+        imdb_data = json.loads(get_content_from_url(imdb_api))
+        if 'Website' in imdb_data and imdb_data['Website'] != 'N/A':
+            website = imdb_data['Website']
+        if 'Ratings' in imdb_data:
+            ratings = imdb_data['Ratings']
+            for rating in ratings:
+                if rating['Source'] == 'Rotten Tomatoes':
+                    visual.rotten_rating = int(rating['Value'].replace('%',''))
+    except:
+        print('Not able to get imdb api')
 
     if douban_id:
         douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
