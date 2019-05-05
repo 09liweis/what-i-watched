@@ -304,57 +304,60 @@ def update_visual(visual):
         print('Not able to get imdb api')
 
     if douban_id:
-        douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
-        print(douban_api)
-        douban_data = json.loads(get_content_from_url(douban_api))
-        
-        durations = douban_data['durations']
-
-        if durations:
-            durations = durations[0]
-            duration = ''
-            for s in durations:
-                if s.isdigit():
-                    duration += s
-            visual.duration = duration
-        
-        #country
-        countries = douban_data['countries']
-        connectVC(visual, countries)
-        
-        #language
-        languages = douban_data['languages']
-        connectVL(visual, languages)
-        
-        # get douban rating
-        douban_rating = douban_data['rating']['average']
-        if not website:
-            website = douban_data['website']
-
-        # release_date = douban_data['pubdate']
-        # if release_date == '':
-        #     release_date = douban_data['pubdates'][0]
-        #     release_date = release_date[0:10]
-        episodes = douban_data['episodes_count']
-        title = douban_data['title']
-        original_title = douban_data['original_title']
-        if visual.imdb_id:
-            imdb_rating = get_imdb_rating(visual.imdb_id)
-            # in case imdb update the html class name
-            if imdb_rating:
-                visual.imdb_rating = imdb_rating
-
-        #update douban rating
-        if douban_rating:
-            visual.douban_rating = douban_rating
-        if website:
-            visual.website = website
-        visual.original_title = original_title
-        visual.title = title
-        # if release_date:
-        #     visual.release_date = release_date
-        if episodes:
-            visual.episodes = episodes
+        try:
+            douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
+            print(douban_api)
+            douban_data = json.loads(get_content_from_url(douban_api))
+            
+            durations = douban_data['durations']
+    
+            if durations:
+                durations = durations[0]
+                duration = ''
+                for s in durations:
+                    if s.isdigit():
+                        duration += s
+                visual.duration = duration
+            
+            #country
+            countries = douban_data['countries']
+            connectVC(visual, countries)
+            
+            #language
+            languages = douban_data['languages']
+            connectVL(visual, languages)
+            
+            # get douban rating
+            douban_rating = douban_data['rating']['average']
+            if not website:
+                website = douban_data['website']
+    
+            # release_date = douban_data['pubdate']
+            # if release_date == '':
+            #     release_date = douban_data['pubdates'][0]
+            #     release_date = release_date[0:10]
+            episodes = douban_data['episodes_count']
+            title = douban_data['title']
+            original_title = douban_data['original_title']
+            if visual.imdb_id:
+                imdb_rating = get_imdb_rating(visual.imdb_id)
+                # in case imdb update the html class name
+                if imdb_rating:
+                    visual.imdb_rating = imdb_rating
+    
+            #update douban rating
+            if douban_rating:
+                visual.douban_rating = douban_rating
+            if website:
+                visual.website = website
+            visual.original_title = original_title
+            visual.title = title
+            # if release_date:
+            #     visual.release_date = release_date
+            if episodes:
+                visual.episodes = episodes
+        except:
+            print('error on getting douban api')
         visual.save(update_fields=['duration','imdb_id','current_episode','douban_rating','website','release_date','imdb_rating','episodes','original_title','title','poster'])
         return visual
 
