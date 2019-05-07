@@ -302,14 +302,15 @@ def update_visual(visual):
             for rating in ratings:
                 if rating['Source'] == 'Rotten Tomatoes':
                     visual.rotten_rating = int(rating['Value'].replace('%',''))
-    except:
-        print('Not able to get imdb api')
+    except Exception as e:
+        print(str(e))
 
     if douban_id:
         try:
             # douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
             douban_api = 'https://samliweisen.herokuapp.com/api/visuals/douban?douban_id=' + douban_id
             douban_data = json.loads(get_content_from_url(douban_api))
+            print(douban_data)
 
             durations = douban_data['durations']
     
@@ -358,8 +359,8 @@ def update_visual(visual):
             #     visual.release_date = release_date
             if episodes:
                 visual.episodes = episodes
-        except:
-            print('error on getting douban api')
+        except Exception as e:
+            print(str(e))
         visual.save(update_fields=['duration','imdb_id','current_episode','douban_rating','website','release_date','imdb_rating','episodes','original_title','title','poster'])
         return visual
 
