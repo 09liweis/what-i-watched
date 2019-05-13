@@ -8,11 +8,13 @@ from django.core.exceptions import ObjectDoesNotExist
 import urllib3, json
 import re
 import time
+import requests
 
 def get_content_from_url(url):
-    url_content = urllib3.PoolManager().request('GET', url)
-    decode_data = url_content.data.decode('utf-8')
-    return decode_data
+    # url_content = urllib3.PoolManager().request('GET', url)
+    # decode_data = url_content.data.decode('utf-8')
+    decode_data = requests.get(url)
+    return decode_data.text
 
 def index(request):
     return json_response({
@@ -131,7 +133,6 @@ def visual_submit(request):
     '''
     funciton to add or update visual
     '''
-    print(request.POST);
     id = int(request.POST.get('id'))
     kv = dict(request.POST)
     
@@ -310,7 +311,7 @@ def update_visual(visual):
             # douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
             douban_api = 'https://samliweisen.herokuapp.com/api/visuals/douban?douban_id=' + douban_id
             douban_data = json.loads(get_content_from_url(douban_api))
-            print(douban_data)
+            # print(douban_data)
 
             durations = douban_data['durations']
     
@@ -373,7 +374,6 @@ def visual_import(request):
         Visual.objects.all().delete()
     
     for i in range(len(visuals) - 1, 0, -1):
-        print(i)
         visual = Visual.objects.create()
         # remove id attribute
         v = visuals[i]
