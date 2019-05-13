@@ -1,6 +1,6 @@
 [[source]]
 url = "https://pypi.python.org/simple"
-verify_ssl = true
+verify_ssl = false
 
 [packages]
 dj-database-url = "*"
@@ -9,6 +9,7 @@ gunicorn = "*"
 psycopg2 = "*"
 whitenoise = "*"
 urllib3 = "*"
+requests = "*
 
 [requires]
 python_version = "3.6.5"
