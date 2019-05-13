@@ -8,13 +8,13 @@ from django.core.exceptions import ObjectDoesNotExist
 import urllib3, json
 import re
 import time
-import requests
+# import requests
 
 def get_content_from_url(url):
-    # url_content = urllib3.PoolManager().request('GET', url)
-    # decode_data = url_content.data.decode('utf-8')
-    decode_data = requests.get(url)
-    return decode_data.text
+    url_content = urllib3.PoolManager().request('GET', url)
+    decode_data = url_content.data.decode('utf-8')
+    # decode_data = requests.get(url).text
+    return decode_data
 
 def index(request):
     return json_response({

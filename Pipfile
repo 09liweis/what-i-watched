@@ -9,7 +9,6 @@ gunicorn = "*"
 psycopg2 = "*"
 whitenoise = "*"
 urllib3 = "*"
-requests = "*
 
 [requires]
-python_version = "3.6.5"
+python_version = "3.6.8"
