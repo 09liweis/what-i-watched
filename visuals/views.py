@@ -11,6 +11,7 @@ import time
 # import requests
 
 def get_content_from_url(url):
+    '''return url content'''
     url_content = urllib3.PoolManager().request('GET', url)
     decode_data = url_content.data.decode('utf-8')
     # decode_data = requests.get(url).text
