@@ -162,7 +162,15 @@ def visual_submit(request):
         setattr(visual, key, value)
     if id == 0:
         visual.save()
-    update_visual(visual)
+    else:
+        visual.save(update_fields=['douban_rating','website','release_date','imdb_rating','episodes','original_title','title','poster'])
+    # update_visual(visual)
+    countries = kv['countries[]']
+    if countries:
+        connectVC(visual, countries)
+    languages = kv['languages[]']
+    if languages:
+        connectVL(visual, languages)
     return json_response({'status': 200})
     
 @csrf_exempt
