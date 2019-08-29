@@ -18,6 +18,7 @@ def get_content_from_url(url):
     return decode_data
 
 def index(request):
+    '''API index page'''
     return json_response({
         'status': 200,
         'msg': 'Something is comming'
