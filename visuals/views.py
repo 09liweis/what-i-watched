@@ -23,7 +23,6 @@ def index(request):
         'status': 200,
         'msg': 'Something is comming'
     })
-    # return render(request, 'index.html')
 
 def json_response(result):
     resp = JsonResponse(result)
