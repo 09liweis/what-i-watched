@@ -98,6 +98,9 @@ def visuals(request):
         }
     )
 
+def douban_search(request):
+    return json_response({'status':200})
+
 def visual_search(request):
     '''Function to search keyword for visuals'''
     keyword = request.GET.get('keyword')
