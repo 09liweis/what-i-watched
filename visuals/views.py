@@ -139,6 +139,7 @@ def visual_submit(request):
     '''
     funciton to add or update visual
     '''
+    print(request.POST)
     id = int(request.POST.get('id'))
     kv = dict(request.POST)
     
