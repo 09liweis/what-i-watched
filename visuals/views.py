@@ -136,55 +136,61 @@ def visual_detail(request, id):
 
 @csrf_exempt
 def visual_submit(request):
-    '''
-    funciton to add or update visual
-    '''
-    print(request.POST)
-    id = int(request.POST.get('id'))
-    kv = dict(request.POST)
-    
-    del kv['id']
+  '''
+  funciton to add or update visual
+  '''
+  print(request.POST)
+  id = int(request.POST.get('id'))
+  kv = dict(request.POST)
+  
+  del kv['id']
 
-    if id == 0:
-      douban_id = kv['douban_id'][0]
-      exist = check_douban_id(douban_id)
-      
-      if exist:
-        result = {
-          'msg': 'Douban Id exist',
-          'code': 'exist'
-        }
-        return json_response(result)
-      visual = Visual.objects.create()
-    else:
-      visual = Visual.objects.get(id=id)
-    for key in kv:
-      value = kv[key][0]
-      if key in ['douban_rating', 'imdb_rating']:
-        value = float(value)
-      if key in ['rotten_rating', 'rotten_audience_rating', 'episodes', 'current_episode']:
-        if value == '':
-          value = 0
-        value = int(value)
-      setattr(visual, key, value)
-    if id == 0:
-      visual.save()
-    else:
-      visual.save(update_fields=['douban_id','imdb_id','duration','douban_rating','website','release_date','imdb_rating','episodes','current_episode','original_title','title','poster'])
-    # update_visual(visual)
-    if 'countries[]' in kv:
-      countries = kv['countries[]']
-    if 'countries[0]' in kv:
-      countries = kv['countries[0]']
-    if countries:
-      connectVC(visual, countries)
-    if 'languages[]' in kv:
-      languages = kv['languages[]']
-    if 'languages[0]' in kv:
-      languages = kv['languages[0]']
-    if languages:
-      connectVL(visual, languages)
-    return json_response({'status': 200})
+  if id == 0:
+    msg = 'add'
+    douban_id = kv['douban_id'][0]
+    exist = check_douban_id(douban_id)
+    
+    if exist:
+      result = {
+        'msg': 'Douban Id exist',
+        'code': 'exist'
+      }
+      return json_response(result)
+    visual = Visual.objects.create()
+  else:
+    msg = 'update'
+    visual = Visual.objects.get(id=id)
+  for key in kv:
+    value = kv[key][0]
+    if key in ['douban_rating', 'imdb_rating']:
+      value = float(value)
+    if key in ['rotten_rating', 'rotten_audience_rating', 'episodes', 'current_episode']:
+      if value == '':
+        value = 0
+      value = int(value)
+    setattr(visual, key, value)
+  if id == 0:
+    visual.save()
+  else:
+    visual.save(update_fields=['douban_id','imdb_id','duration','douban_rating','website','release_date','imdb_rating','episodes','current_episode','original_title','title','poster'])
+  # update_visual(visual)
+  # handle website post
+  if 'countries[]' in kv:
+    countries = kv['countries[]']
+  # handle reactnative axio post
+  if 'countries[0]' in kv:
+    countries = kv['countries[0]']
+  if countries:
+    connectVC(visual, countries)
+  # handle website post
+  if 'languages[]' in kv:
+    languages = kv['languages[]']
+  # handle reactnative axio post
+  if 'languages[0]' in kv:
+    languages = kv['languages[0]']
+  if languages:
+    connectVL(visual, languages)
+  return json_response({'status': 200,'msg':msg})
     
 @csrf_exempt
 def visual_delete(request):
