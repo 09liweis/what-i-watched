@@ -139,7 +139,6 @@ def visual_submit(request):
     '''
     funciton to add or update visual
     '''
-    print(request.body)
     print(request.POST)
     id = int(request.POST.get('id'))
     kv = dict(request.POST)
@@ -173,10 +172,16 @@ def visual_submit(request):
     else:
       visual.save(update_fields=['douban_id','imdb_id','duration','douban_rating','website','release_date','imdb_rating','episodes','current_episode','original_title','title','poster'])
     # update_visual(visual)
-    countries = kv['countries[]']
+    if 'countries[]' in kv:
+      countries = kv['countries[]']
+    if 'countries[0]' in kv:
+      countries - kv['countries[0]']
     if countries:
       connectVC(visual, countries)
-    languages = kv['languages[]']
+    if 'languages[]' in kv:
+      languages = kv['languages[]']
+    if 'languages[0]' in kv:
+      languages - kv['languages[0]']
     if languages:
       connectVL(visual, languages)
     return json_response({'status': 200})
