@@ -158,15 +158,15 @@ def visual_submit(request):
       visual = Visual.objects.create()
     else:
       visual = Visual.objects.get(id=id)
-      for key in kv:
-        value = kv[key][0]
-        if key in ['douban_rating', 'imdb_rating']:
-          value = float(value)
-        if key in ['rotten_rating', 'rotten_audience_rating', 'episodes', 'current_episode']:
-          if value == '':
-            value = 0
-          value = int(value)
-        setattr(visual, key, value)
+    for key in kv:
+      value = kv[key][0]
+      if key in ['douban_rating', 'imdb_rating']:
+        value = float(value)
+      if key in ['rotten_rating', 'rotten_audience_rating', 'episodes', 'current_episode']:
+        if value == '':
+          value = 0
+        value = int(value)
+      setattr(visual, key, value)
     if id == 0:
       visual.save()
     else:
