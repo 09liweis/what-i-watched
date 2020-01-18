@@ -27,7 +27,6 @@ urlpatterns = [
     url(r'^api/visual_import', visuals.views.visual_import, name='visual_import'),
     url(r'^api/random_visual', visuals.views.random_visual, name='random_visual'),
     
-    url(r'^api/douban_search', visuals.views.douban_search, name='douban_search'),
     url(r'^api/get_imdb_id', visuals.views.get_imdb_id, name='get_imdb'),
     url(r'^api/get_imdb_detail', visuals.views.get_imdb_detail, name='get_imdb_detail'),
     
