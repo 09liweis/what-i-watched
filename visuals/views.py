@@ -175,13 +175,13 @@ def visual_submit(request):
     if 'countries[]' in kv:
       countries = kv['countries[]']
     if 'countries[0]' in kv:
-      countries - kv['countries[0]']
+      countries = kv['countries[0]']
     if countries:
       connectVC(visual, countries)
     if 'languages[]' in kv:
       languages = kv['languages[]']
     if 'languages[0]' in kv:
-      languages - kv['languages[0]']
+      languages = kv['languages[0]']
     if languages:
       connectVL(visual, languages)
     return json_response({'status': 200})
