@@ -98,9 +98,6 @@ def visuals(request):
         }
     )
 
-def douban_search(request):
-    return json_response({'status':200})
-
 def visual_search(request):
     '''Function to search keyword for visuals'''
     keyword = request.GET.get('keyword')
@@ -148,38 +145,38 @@ def visual_submit(request):
     del kv['id']
 
     if id == 0:
-        douban_id = kv['douban_id'][0]
-        exist = check_douban_id(douban_id)
-        
-        if exist:
-            result = {
-                'msg': 'Douban Id exist',
-                'code': 'exist'
-            }
-            return json_response(result)
-        visual = Visual.objects.create()
+      douban_id = kv['douban_id'][0]
+      exist = check_douban_id(douban_id)
+      
+      if exist:
+        result = {
+          'msg': 'Douban Id exist',
+          'code': 'exist'
+        }
+        return json_response(result)
+      visual = Visual.objects.create()
     else:
-        visual = Visual.objects.get(id=id)
-    for key in kv:
+      visual = Visual.objects.get(id=id)
+      for key in kv:
         value = kv[key][0]
         if key in ['douban_rating', 'imdb_rating']:
-            value = float(value)
+          value = float(value)
         if key in ['rotten_rating', 'rotten_audience_rating', 'episodes', 'current_episode']:
-            if value == '':
-                value = 0
-            value = int(value)
+          if value == '':
+            value = 0
+          value = int(value)
         setattr(visual, key, value)
     if id == 0:
-        visual.save()
+      visual.save()
     else:
-        visual.save(update_fields=['duration','douban_rating','website','release_date','imdb_rating','episodes','current_episode','original_title','title','poster'])
+      visual.save(update_fields=['duration','douban_rating','website','release_date','imdb_rating','episodes','current_episode','original_title','title','poster'])
     # update_visual(visual)
     countries = kv['countries[]']
     if countries:
-        connectVC(visual, countries)
+      connectVC(visual, countries)
     languages = kv['languages[]']
     if languages:
-        connectVL(visual, languages)
+      connectVL(visual, languages)
     return json_response({'status': 200})
     
 @csrf_exempt
