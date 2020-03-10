@@ -172,7 +172,7 @@ def visual_submit(request):
   if id == 0:
     visual.save()
   else:
-    visual.save(update_fields=['douban_id','imdb_id','duration','douban_rating','website','release_date','imdb_rating','episodes','current_episode','original_title','title','poster'])
+    visual.save(update_fields=['douban_id','imdb_id','duration','douban_rating','website','release_date','imdb_rating','episodes','current_episode','original_title','title','poster','summary'])
   # update_visual(visual)
   # handle website post
   if 'countries[]' in kv:
