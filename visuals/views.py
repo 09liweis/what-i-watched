@@ -164,7 +164,6 @@ def visual_submit(request):
     msg = 'update'
     visual = Visual.objects.get(id=id)
   for key in kv:
-    console.log(key)
     value = kv[key][0]
     if key in ['douban_rating', 'imdb_rating']:
       value = float(value)
