@@ -158,10 +158,13 @@ def visual_submit(request):
       }
       return json_response(result)
     visual = Visual.objects.create()
+    print(visual)
+    print(visual.douban_id)
   else:
     msg = 'update'
     visual = Visual.objects.get(id=id)
   for key in kv:
+    console.log(key)
     value = kv[key][0]
     if key in ['douban_rating', 'imdb_rating']:
       value = float(value)
@@ -169,7 +172,6 @@ def visual_submit(request):
       if value == '':
         value = 0
       value = int(value)
-    print(visual.douban_id)
     setattr(visual, key, value)
   if id == 0:
     print('create')
