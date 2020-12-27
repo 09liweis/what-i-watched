@@ -145,11 +145,10 @@ def visual_submit(request):
   
   del kv['id']
 
+  print(id);
   if id == 0:
     msg = 'add'
-    print(kv['douban_id'])
     douban_id = kv['douban_id'][0]
-    print(douban_id)
     exist = check_douban_id(douban_id)
     
     if exist:
