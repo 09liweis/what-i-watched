@@ -171,8 +171,10 @@ def visual_submit(request):
       value = int(value)
     setattr(visual, key, value)
   if id == 0:
+    print('create')
     visual.save()
   else:
+    print('update')
     visual.save(update_fields=['douban_id','imdb_id','duration','douban_rating','website','release_date','imdb_rating','episodes','current_episode','original_title','title','poster','summary'])
   # update_visual(visual)
   # handle website post
