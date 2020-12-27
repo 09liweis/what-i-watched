@@ -112,16 +112,16 @@ def visual_search(request):
     })
 
 def check_douban_id(douban_id):
-    '''
-    Check if visual exists with douban id
-    '''
-    try:
-        Visual.objects.get(douban_id=douban_id)
-        exist = True
-        
-    except:
-        exist = False
-    return exist
+  '''
+  Check if visual exists with douban id
+  '''
+  try:
+    Visual.objects.get(douban_id=douban_id)
+    exist = True
+      
+  except:
+    exist = False
+  return exist
 
 def visual_detail(request, id):
     '''
@@ -150,7 +150,7 @@ def visual_submit(request):
     msg = 'add'
     douban_id = kv['douban_id'][0]
     exist = check_douban_id(douban_id)
-    
+    print(exist)
     if exist:
       result = {
         'msg': 'Douban Id exist',
