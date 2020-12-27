@@ -169,6 +169,7 @@ def visual_submit(request):
       if value == '':
         value = 0
       value = int(value)
+    print(visual.douban_id)
     setattr(visual, key, value)
   if id == 0:
     print('create')
