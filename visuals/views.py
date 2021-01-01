@@ -71,32 +71,32 @@ def stats(request):
 
 # visual list function
 def visuals(request):
-    page = request.GET.get('page')
-    limit = request.GET.get('limit')
-    tp = request.GET.get('type')
-    total = Visual.objects.all().count()
-    # ternary operator
-    page = int(page) if page else 1
-    limit = int(limit) if limit else total
-    offset = (page - 1) * limit
-    
-    if tp == 'not_start':
-        visuals = Visual.objects.filter(current_episode=0).order_by('-date_updated')
-        total = len(visuals)
-    else:
-        visuals = Visual.objects.filter().order_by('-date_updated')[offset:offset + limit]
-    results = []
-    for v in visuals:
-        results.append(v.json())
-    return json_response(
-        {
-            'results': results,
-            'total': total,
-            'per_page': limit,
-            'type': 'list',
-            'page': page,
-        }
-    )
+  page = request.GET.get('page')
+  limit = request.GET.get('limit')
+  tp = request.GET.get('type')
+  total = Visual.objects.all().count()
+  # ternary operator
+  page = int(page) if page else 1
+  limit = int(limit) if limit else total
+  offset = (page - 1) * limit
+  
+  if tp == 'not_start':
+    visuals = Visual.objects.filter(current_episode=0).order_by('-date_updated')
+    total = len(visuals)
+  else:
+    visuals = Visual.objects.filter().order_by('-date_updated')[offset:offset + limit]
+  results = []
+  for v in visuals:
+    results.append(v.json())
+  return json_response(
+    {
+      'results': results,
+      'total': total,
+      'per_page': limit,
+      'type': 'list',
+      'page': page,
+    }
+  )
 
 def visual_search(request):
     '''Function to search keyword for visuals'''
