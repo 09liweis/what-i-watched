@@ -99,17 +99,17 @@ def visuals(request):
   )
 
 def visual_search(request):
-    '''Function to search keyword for visuals'''
-    keyword = request.GET.get('keyword')
-    results = []
-    if keyword:
-        visuals = Visual.objects.filter(title__icontains=keyword)
-        for v in visuals:
-            results.append(v.json())
-    return json_response({
-        'results': results,
-        'keyword': keyword
-    })
+  '''Function to search keyword for visuals'''
+  keyword = request.GET.get('keyword')
+  results = []
+  if keyword:
+    visuals = Visual.objects.filter(title__icontains=keyword)
+    for v in visuals:
+      results.append(v.json())
+  return json_response({
+    'results': results,
+    'keyword': keyword
+  })
 
 def check_douban_id(douban_id):
   '''
