@@ -25,9 +25,9 @@ def index(request):
   })
 
 def json_response(result):
-    resp = JsonResponse(result)
-    resp['Access-Control-Allow-Origin'] = '*'
-    return resp
+  resp = JsonResponse(result)
+  resp['Access-Control-Allow-Origin'] = '*'
+  return resp
 
 def stats(request):
     visuals = Visual.objects.all()
