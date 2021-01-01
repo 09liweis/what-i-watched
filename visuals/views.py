@@ -509,16 +509,16 @@ def languages(request):
     return json_response({'status':200,'result':result})
     
 def connectVC(visual, countries):
-    '''Connect Visual to Countries'''
-    for c in countries:
-        try:
-            country = Country.objects.get(title_zh=c)
-        except:
-            country = Country.objects.create()
-            country.title_zh = c
-            country.save()
-        if country not in visual.country_set.all():
-            country.visuals.add(visual)
+  '''Connect Visual to Countries'''
+  for c in countries:
+    try:
+      country = Country.objects.get(title_zh=c)
+    except:
+      country = Country.objects.create()
+      country.title_zh = c
+      country.save()
+    if country not in visual.country_set.all():
+      country.visuals.add(visual)
 
 def connectVL(visual, languages):
   for lang in languages:
