@@ -124,15 +124,15 @@ def check_douban_id(douban_id):
   return exist
 
 def visual_detail(request, id):
-    '''
-    Return response of visual detail based on visual id.
-    '''
-    try: 
-        visual = Visual.objects.get(id=id)
-        result = visual.json()
-    except ObjectDoesNotExist:
-        result = 'Visual Not Exsit'
-    return json_response({'result': result, 'type': 'detail'})
+  '''
+  Return response of visual detail based on visual id.
+  '''
+  try: 
+    visual = Visual.objects.get(id=id)
+    result = visual.json()
+  except ObjectDoesNotExist:
+    result = 'Visual Not Exsit'
+  return json_response({'result': result, 'type': 'detail'})
 
 @csrf_exempt
 def visual_submit(request):
