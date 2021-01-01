@@ -494,12 +494,12 @@ def image_submit(request):
     return json_response(result)
     
 def countries(request):
-    '''Get all countries'''
-    countries = Country.objects.all()
-    result = []
-    for c in countries:
-        result.append(c.title_zh)
-    return json_response({'status': 200, 'result':result})
+  '''Get all countries'''
+  countries = Country.objects.all()
+  result = []
+  for c in countries:
+    result.append(c.title_zh)
+  return json_response({'status': 200, 'result':result})
 
 def languages(request):
   languages = Language.objects.all()
