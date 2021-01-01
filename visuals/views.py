@@ -199,21 +199,21 @@ def visual_submit(request):
     
 @csrf_exempt
 def visual_delete(request):
-    '''Delete a visual'''
-    visual_id = request.POST.get('id')
-    if not visual_id:
-        msg = 'Id not found'
-    elif not visual_id.isdigit():
-        msg = 'Id is not invalid'
-    else:
-        visual_id = int(visual_id)
-        try: 
-            visual = Visual.objects.get(id=visual_id)
-            visual.delete()
-            msg = 'Visual ' + id + ' has been deleted'
-        except ObjectDoesNotExist:
-            msg = 'Visual Not Exsit'
-    return json_response({'status': 200, 'msg': msg})
+  '''Delete a visual'''
+  visual_id = request.POST.get('id')
+  if not visual_id:
+    msg = 'Id not found'
+  elif not visual_id.isdigit():
+    msg = 'Id is not invalid'
+  else:
+    visual_id = int(visual_id)
+    try: 
+      visual = Visual.objects.get(id=visual_id)
+      visual.delete()
+      msg = 'Visual ' + id + ' has been deleted'
+    except ObjectDoesNotExist:
+      msg = 'Visual Not Exsit'
+  return json_response({'status': 200, 'msg': msg})
 
 @csrf_exempt
 def increase_episode(request):
