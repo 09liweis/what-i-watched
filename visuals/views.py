@@ -521,12 +521,12 @@ def connectVC(visual, countries):
             country.visuals.add(visual)
 
 def connectVL(visual, languages):
-    for lang in languages:
-        try:
-            l = Language.objects.get(title_zh=lang)
-        except:
-            l = Language.objects.create()
-            l.title_zh = lang
-            l.save()
-        if l not in visual.language_set.all():
-            l.visuals.add(visual)
+  for lang in languages:
+    try:
+      l = Language.objects.get(title_zh=lang)
+    except:
+      l = Language.objects.create()
+      l.title_zh = lang
+      l.save()
+    if l not in visual.language_set.all():
+      l.visuals.add(visual)
