@@ -502,11 +502,11 @@ def countries(request):
     return json_response({'status': 200, 'result':result})
 
 def languages(request):
-    languages = Language.objects.all()
-    result = []
-    for l in languages:
-        result.append(l.title_zh)
-    return json_response({'status':200,'result':result})
+  languages = Language.objects.all()
+  result = []
+  for l in languages:
+    result.append(l.title_zh)
+  return json_response({'status':200,'result':result})
     
 def connectVC(visual, countries):
   '''Connect Visual to Countries'''
