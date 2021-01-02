@@ -86,15 +86,15 @@ class Country(models.Model):
     ordering = ('date_updated',)
 
 class Language(models.Model):
-    title = models.TextField(blank=True)
-    title_zh = models.TextField(blank=True)
-    date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now=True)
-    visuals = models.ManyToManyField(Visual)
-    def __str__(self):
-        return self.title_zh
-    class Meta:
-        ordering = ('date_updated',)
+  title = models.TextField(blank=True)
+  title_zh = models.TextField(blank=True)
+  date_created = models.DateTimeField(auto_now_add=True)
+  date_updated = models.DateTimeField(auto_now=True)
+  visuals = models.ManyToManyField(Visual)
+  def __str__(self):
+    return self.title_zh
+  class Meta:
+    ordering = ('date_updated',)
 
 class Song(models.Model):
     title = models.CharField(max_length=60, blank=True)
