@@ -97,29 +97,29 @@ class Language(models.Model):
     ordering = ('date_updated',)
 
 class Song(models.Model):
-    title = models.CharField(max_length=60, blank=True)
-    url = models.TextField(blank=True)
-    image = models.TextField(blank=True)
-    artist = models.CharField(max_length=60, blank=True)
-    visual = models.ForeignKey(Visual, on_delete=models.CASCADE)
-    date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now=True)
-    
-    def __str__(self):
-        return self.title
-    
-    class Meta:
-        ordering = ('date_updated',)
-    
-    def get_dict(self):
-        return {
-            'id': self.id,
-            'title': self.title,
-            'artist': self.artist,
-            'url': self.url,
-            'image': self.image,
-            'visual_id': self.visual.id
-        }
+  title = models.CharField(max_length=60, blank=True)
+  url = models.TextField(blank=True)
+  image = models.TextField(blank=True)
+  artist = models.CharField(max_length=60, blank=True)
+  visual = models.ForeignKey(Visual, on_delete=models.CASCADE)
+  date_created = models.DateTimeField(auto_now_add=True)
+  date_updated = models.DateTimeField(auto_now=True)
+  
+  def __str__(self):
+    return self.title
+  
+  class Meta:
+    ordering = ('date_updated',)
+  
+  def get_dict(self):
+    return {
+      'id': self.id,
+      'title': self.title,
+      'artist': self.artist,
+      'url': self.url,
+      'image': self.image,
+      'visual_id': self.visual.id
+    }
 
 class VisualImage(models.Model):
     title = models.TextField(blank=True)
