@@ -461,19 +461,19 @@ def song_submit(request):
     return json_response({'result': 200})
 
 def images(request):
-    visual_id = request.GET.get('visual_id')
-    if (visual_id):
-        images = VisualImage.objects.filter(visual_id=visual_id).order_by('-date_updated')
-    else:
-        images = VisualImage.objects.all().order_by('-date_updated')
-    results = []
-    for image in images:
-        results.append({
-            'id': image.id,
-            'title': image.title,
-            'url': image.url
-        })
-    return json_response(results)
+  visual_id = request.GET.get('visual_id')
+  if (visual_id):
+    images = VisualImage.objects.filter(visual_id=visual_id).order_by('-date_updated')
+  else:
+    images = VisualImage.objects.all().order_by('-date_updated')
+  results = []
+  for image in images:
+    results.append({
+      'id': image.id,
+      'title': image.title,
+      'url': image.url
+    })
+  return json_response(results)
 
 @csrf_exempt
 def image_submit(request):
