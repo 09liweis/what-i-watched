@@ -122,15 +122,15 @@ class Song(models.Model):
     }
 
 class VisualImage(models.Model):
-    title = models.TextField(blank=True)
-    url = models.TextField()
-    date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now=True)
-    visual = models.ForeignKey(Visual, on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return self.title
+  title = models.TextField(blank=True)
+  url = models.TextField()
+  date_created = models.DateTimeField(auto_now_add=True)
+  date_updated = models.DateTimeField(auto_now=True)
+  visual = models.ForeignKey(Visual, on_delete=models.CASCADE)
+  
+  def __str__(self):
+    return self.title
 
-    class Meta:
-        ordering = ('date_created',)
+  class Meta:
+    ordering = ('date_created',)
     
