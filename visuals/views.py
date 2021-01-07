@@ -229,30 +229,30 @@ def increase_episode(request):
 
 @csrf_exempt
 def get_imdb_id(request):
-    douban_id = request.GET.get('douban_id')
-    if not douban_id:
-        return json_response({
-            'status': 200,
-            'msg': 'Douban id not found'
-        })
-    # douban_movie_url = 'https://movie.douban.com/subject/' + douban_id
-    douban_movie_url = 'https://samliweisen.herokuapp.com/api/visuals/get_imdb_id?douban_id=' + douban_id
-    decode_data = get_content_from_url(douban_movie_url)
-    
-    imdb_list = re.findall('href="http://www.imdb.com/title/(.*?)"', decode_data)
-    # get list of release dates from webpage
-    release_dates = re.findall(r'[0-9]{4}-[0-9]{2}-[0-9]{2}\([\u4e00-\u9fff]+\)', decode_data)
-    # remove duplicate release date
-    release_dates = list(set(release_dates))
-    # initial imdb_id
-    imdb_id = ''
-    if len(imdb_list) > 0:
-        imdb_id = imdb_list[0]
+  douban_id = request.GET.get('douban_id')
+  if not douban_id:
     return json_response({
-        'status': 200,
-        'imdb_id': imdb_id,
-        'release_dates': release_dates
+      'status': 200,
+      'msg': 'Douban id not found'
     })
+  # douban_movie_url = 'https://movie.douban.com/subject/' + douban_id
+  douban_movie_url = 'https://samliweisen.herokuapp.com/api/visuals/get_imdb_id?douban_id=' + douban_id
+  decode_data = get_content_from_url(douban_movie_url)
+  
+  imdb_list = re.findall('href="http://www.imdb.com/title/(.*?)"', decode_data)
+  # get list of release dates from webpage
+  release_dates = re.findall(r'[0-9]{4}-[0-9]{2}-[0-9]{2}\([\u4e00-\u9fff]+\)', decode_data)
+  # remove duplicate release date
+  release_dates = list(set(release_dates))
+  # initial imdb_id
+  imdb_id = ''
+  if len(imdb_list) > 0:
+    imdb_id = imdb_list[0]
+  return json_response({
+    'status': 200,
+    'imdb_id': imdb_id,
+    'release_dates': release_dates
+  })
 
 def get_imdb_id_from_douban(douban_id):
     douban_movie_url = 'https://movie.douban.com/subject/' + douban_id
