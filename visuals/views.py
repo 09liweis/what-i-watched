@@ -171,6 +171,8 @@ def visual_submit(request):
       if value == '':
         value = 0
       value = int(value)
+    if key in ['original_title']
+      value = ''
     setattr(visual, key, value)
   if id == 0:
     print('create')
