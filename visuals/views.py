@@ -268,13 +268,13 @@ def get_imdb_id_from_douban(douban_id):
 
 @csrf_exempt
 def get_imdb_detail(request):
-    '''Get imdb detail with imdb id'''
-    imdb_id = request.GET.get('imdb_id')
-    imdb_rating = get_imdb_rating(imdb_id)
-    return json_response({
-        'statue': 200,
-        'imdb_rating': imdb_rating
-    })
+  '''Get imdb detail with imdb id'''
+  imdb_id = request.GET.get('imdb_id')
+  imdb_rating = get_imdb_rating(imdb_id)
+  return json_response({
+    'statue': 200,
+    'imdb_rating': imdb_rating
+  })
 
 def get_imdb_rating(imdb_id):
     '''Get imdb rating with imdb id from imdb website'''
