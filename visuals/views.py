@@ -309,8 +309,8 @@ def visual_update_cron(request):
     })
 
 def random_visual(request):
-    visual = get_random_visual()
-    return json_response({'status':200,'result':visual.json()})
+  visual = get_random_visual()
+  return json_response({'status':200,'result':visual.json()})
 
 def get_random_visual():
     '''Return random Visual'''
