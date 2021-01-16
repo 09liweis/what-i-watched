@@ -258,13 +258,13 @@ def get_imdb_id(request):
   })
 
 def get_imdb_id_from_douban(douban_id):
-    douban_movie_url = 'https://movie.douban.com/subject/' + douban_id
-    decode_data = get_content_from_url(douban_movie_url)
-    imdb_list = re.findall('href="http://www.imdb.com/title/(.*?)"', decode_data)
-    imdb_id = ''
-    if len(imdb_list) > 0:
-        imdb_id = imdb_list[0]
-    return imdb_id
+  douban_movie_url = 'https://movie.douban.com/subject/' + douban_id
+  decode_data = get_content_from_url(douban_movie_url)
+  imdb_list = re.findall('href="http://www.imdb.com/title/(.*?)"', decode_data)
+  imdb_id = ''
+  if len(imdb_list) > 0:
+      imdb_id = imdb_list[0]
+  return imdb_id
 
 @csrf_exempt
 def get_imdb_detail(request):
