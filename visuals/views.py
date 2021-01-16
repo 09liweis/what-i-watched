@@ -313,9 +313,9 @@ def random_visual(request):
   return json_response({'status':200,'result':visual.json()})
 
 def get_random_visual():
-    '''Return random Visual'''
-    visual = Visual.objects.order_by('?')[0]
-    return visual
+  '''Return random Visual'''
+  visual = Visual.objects.order_by('?')[0]
+  return visual
 
 def update_visual(visual):
     '''Return the updated visual'''
