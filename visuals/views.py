@@ -401,24 +401,24 @@ def update_visual(visual):
         return visual
 
 def visual_import(request):
-    '''Import production data to development'''
-    production_api = 'https://what-i-watched.herokuapp.com/api/visuals'
-    decode_data = json.loads(get_content_from_url(production_api))
-    visuals = decode_data['results']
-    if len(visuals) > 0:
-        Visual.objects.all().delete()
-    
-    for i in range(len(visuals) - 1, 0, -1):
-        visual = Visual.objects.create()
-        # remove id attribute
-        v = visuals[i]
-        del v['id']
-        for key in v:
-            setattr(visual, key, v[key])
-        visual.save()
-    return json_response({
-        'status': 200
-    })
+  '''Import production data to development'''
+  production_api = 'https://what-i-watched.herokuapp.com/api/visuals'
+  decode_data = json.loads(get_content_from_url(production_api))
+  visuals = decode_data['results']
+  if len(visuals) > 0:
+    Visual.objects.all().delete()
+  
+  for i in range(len(visuals) - 1, 0, -1):
+    visual = Visual.objects.create()
+    # remove id attribute
+    v = visuals[i]
+    del v['id']
+    for key in v:
+      setattr(visual, key, v[key])
+    visual.save()
+  return json_response({
+    'status': 200
+  })
 
 # /api/songs?visual_id=1
 # /api/songs
