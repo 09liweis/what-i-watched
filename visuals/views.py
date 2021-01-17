@@ -423,16 +423,16 @@ def visual_import(request):
 # /api/songs?visual_id=1
 # /api/songs
 def songs(request):
-    visual_id = request.GET.get('visual_id')
-    if (visual_id):
-        # get songs for specific visual
-        songs = Song.objects.filter(visual_id=visual_id).order_by('-date_updated')
-    else:
-        songs = Song.objects.all().order_by('-date_updated')
-    results = []
-    for s in songs:
-        results.append(s.get_dict())
-    return json_response({'results': results})
+  visual_id = request.GET.get('visual_id')
+  if (visual_id):
+    # get songs for specific visual
+    songs = Song.objects.filter(visual_id=visual_id).order_by('-date_updated')
+  else:
+    songs = Song.objects.all().order_by('-date_updated')
+  results = []
+  for s in songs:
+    results.append(s.get_dict())
+  return json_response({'results': results})
 
 def song_detail(request, id):
     '''Return song with id'''
