@@ -318,87 +318,87 @@ def get_random_visual():
   return visual
 
 def update_visual(visual):
-    '''Return the updated visual'''
-    douban_id = visual.douban_id
-    website = ''
-    imdb_id = visual.imdb_id
-    if not imdb_id:
-        try:
-            imdb_id = get_imdb_id_from_douban(douban_id)
-            visual.imdb_id = imdb_id
-        except:
-            print('Not able to get imdb id from douban website')
+  '''Return the updated visual'''
+  douban_id = visual.douban_id
+  website = ''
+  imdb_id = visual.imdb_id
+  if not imdb_id:
     try:
-        imdb_api = 'https://www.omdbapi.com/?apikey=6ad10fa5&i=' + imdb_id
-        imdb_data = json.loads(get_content_from_url(imdb_api))
-        if 'Website' in imdb_data and imdb_data['Website'] != 'N/A':
-            website = imdb_data['Website']
-        if 'Ratings' in imdb_data:
-            ratings = imdb_data['Ratings']
-            for rating in ratings:
-                if rating['Source'] == 'Rotten Tomatoes':
-                    visual.rotten_rating = int(rating['Value'].replace('%',''))
+      imdb_id = get_imdb_id_from_douban(douban_id)
+      visual.imdb_id = imdb_id
+    except:
+      print('Not able to get imdb id from douban website')
+  try:
+    imdb_api = 'https://www.omdbapi.com/?apikey=6ad10fa5&i=' + imdb_id
+    imdb_data = json.loads(get_content_from_url(imdb_api))
+    if 'Website' in imdb_data and imdb_data['Website'] != 'N/A':
+      website = imdb_data['Website']
+    if 'Ratings' in imdb_data:
+      ratings = imdb_data['Ratings']
+      for rating in ratings:
+        if rating['Source'] == 'Rotten Tomatoes':
+          visual.rotten_rating = int(rating['Value'].replace('%',''))
+  except Exception as e:
+    print(str(e))
+
+  if douban_id:
+    try:
+      # douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
+      douban_api = 'https://samliweisen.herokuapp.com/api/visuals/douban?douban_id=' + douban_id
+      douban_data = json.loads(get_content_from_url(douban_api))
+      # print(douban_data)
+
+      durations = douban_data['durations']
+
+      if durations:
+        durations = durations[0]
+        duration = ''
+        for s in durations:
+          if s.isdigit():
+            duration += s
+        visual.duration = duration
+      
+      #country
+      countries = douban_data['countries']
+      connectVC(visual, countries)
+      
+      #language
+      languages = douban_data['languages']
+      connectVL(visual, languages)
+      
+      # get douban rating
+      douban_rating = douban_data['rating']['average']
+      if not website:
+        website = douban_data['website']
+
+      # release_date = douban_data['pubdate']
+      # if release_date == '':
+      #     release_date = douban_data['pubdates'][0]
+      #     release_date = release_date[0:10]
+      episodes = douban_data['episodes_count']
+      title = douban_data['title']
+      original_title = douban_data['original_title']
+      if visual.imdb_id:
+        imdb_rating = get_imdb_rating(visual.imdb_id)
+        # in case imdb update the html class name
+        if imdb_rating:
+          visual.imdb_rating = imdb_rating
+
+      #update douban rating
+      if douban_rating:
+        visual.douban_rating = douban_rating
+      if website:
+        visual.website = website
+      visual.original_title = original_title
+      visual.title = title
+      # if release_date:
+      #     visual.release_date = release_date
+      if episodes:
+        visual.episodes = episodes
     except Exception as e:
-        print(str(e))
-
-    if douban_id:
-        try:
-            # douban_api = 'https://api.douban.com/v2/movie/subject/' + douban_id + '?apikey=0df993c66c0c636e29ecbb5344252a4a'
-            douban_api = 'https://samliweisen.herokuapp.com/api/visuals/douban?douban_id=' + douban_id
-            douban_data = json.loads(get_content_from_url(douban_api))
-            # print(douban_data)
-
-            durations = douban_data['durations']
-    
-            if durations:
-                durations = durations[0]
-                duration = ''
-                for s in durations:
-                    if s.isdigit():
-                        duration += s
-                visual.duration = duration
-            
-            #country
-            countries = douban_data['countries']
-            connectVC(visual, countries)
-            
-            #language
-            languages = douban_data['languages']
-            connectVL(visual, languages)
-            
-            # get douban rating
-            douban_rating = douban_data['rating']['average']
-            if not website:
-                website = douban_data['website']
-    
-            # release_date = douban_data['pubdate']
-            # if release_date == '':
-            #     release_date = douban_data['pubdates'][0]
-            #     release_date = release_date[0:10]
-            episodes = douban_data['episodes_count']
-            title = douban_data['title']
-            original_title = douban_data['original_title']
-            if visual.imdb_id:
-                imdb_rating = get_imdb_rating(visual.imdb_id)
-                # in case imdb update the html class name
-                if imdb_rating:
-                    visual.imdb_rating = imdb_rating
-    
-            #update douban rating
-            if douban_rating:
-                visual.douban_rating = douban_rating
-            if website:
-                visual.website = website
-            visual.original_title = original_title
-            visual.title = title
-            # if release_date:
-            #     visual.release_date = release_date
-            if episodes:
-                visual.episodes = episodes
-        except Exception as e:
-            print(str(e))
-        visual.save(update_fields=['duration','imdb_id','current_episode','douban_rating','website','release_date','imdb_rating','episodes','original_title','title','poster'])
-        return visual
+      print(str(e))
+    visual.save(update_fields=['duration','imdb_id','current_episode','douban_rating','website','release_date','imdb_rating','episodes','original_title','title','poster'])
+    return visual
 
 def visual_import(request):
   '''Import production data to development'''
