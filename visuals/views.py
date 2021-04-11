@@ -30,44 +30,44 @@ def json_response(result):
   return resp
 
 def stats(request):
-    visuals = Visual.objects.all()
-    statics = {
-        'movie': 0,
-        'tv': 0,
-        'years':{},
-        'countries':{},
-        'languages':{}
-    }
-    for v in visuals:
-        if v.visual_type == 'movie':
-            statics['movie'] += 1
-        else:
-            statics['tv'] += 1
+  visuals = Visual.objects.all()
+  statics = {
+    'movie': 0,
+    'tv': 0,
+    'years':{},
+    'countries':{},
+    'languages':{}
+  }
+  for v in visuals:
+    if v.visual_type == 'movie':
+      statics['movie'] += 1
+    else:
+      statics['tv'] += 1
+    
+    countries = v.country_set.all()
+    for c in countries:
+      title_zh = c.title_zh
+      if title_zh in statics['countries']:
+        statics['countries'][title_zh] += 1
+      else:
+        statics['countries'][title_zh] = 1
+    
+    languages = v.language_set.all()
+    for l in languages:
+      title_zh = l.title_zh
+      if title_zh in statics['languages']:
+        statics['languages'][title_zh] += 1
+      else:
+        statics['languages'][title_zh] = 1
         
-        countries = v.country_set.all()
-        for c in countries:
-            title_zh = c.title_zh
-            if title_zh in statics['countries']:
-                statics['countries'][title_zh] += 1
-            else:
-                statics['countries'][title_zh] = 1
-        
-        languages = v.language_set.all()
-        for l in languages:
-                title_zh = l.title_zh
-                if title_zh in statics['languages']:
-                    statics['languages'][title_zh] += 1
-                else:
-                    statics['languages'][title_zh] = 1
-            
-        release_date = v.release_date
-        if release_date:
-            year = release_date[0:4]
-            if year in statics['years']:
-                statics['years'][year] += 1
-            else:
-                statics['years'][year] = 1
-    return json_response(statics)
+    release_date = v.release_date
+    if release_date:
+      year = release_date[0:4]
+      if year in statics['years']:
+        statics['years'][year] += 1
+      else:
+        statics['years'][year] = 1
+  return json_response(statics)
 
 # visual list function
 def visuals(request):
