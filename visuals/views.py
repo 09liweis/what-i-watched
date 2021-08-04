@@ -213,7 +213,7 @@ def visual_delete(request):
     try: 
       visual = Visual.objects.get(id=visual_id)
       visual.delete()
-      msg = 'Visual ' + id + ' has been deleted'
+      msg = 'Visual ' + str(id) + ' has been deleted'
     except ObjectDoesNotExist:
       msg = 'Visual Not Exsit'
   return json_response({'status': 200, 'msg': msg})
