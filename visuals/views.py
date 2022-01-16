@@ -150,7 +150,7 @@ def visual_submit(request):
     msg = 'add'
     douban_id = kv['douban_id'][0]
     exist = check_douban_id(douban_id)
-    print(exist)
+    print('exist')
     if exist:
       result = {
         'msg': 'Douban Id exist',
@@ -158,8 +158,6 @@ def visual_submit(request):
       }
       return json_response(result)
     visual = Visual.objects.create()
-    print(visual)
-    print(visual.douban_id)
   else:
     msg = 'update'
     visual = Visual.objects.get(id=id)
