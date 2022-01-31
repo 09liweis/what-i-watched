@@ -9,6 +9,7 @@ gunicorn = "*"
 psycopg2 = "*"
 whitenoise = "*"
 urllib3 = "*"
+django-cors-header = "*"
 
 [requires]
 python_version = "3.6.8"
