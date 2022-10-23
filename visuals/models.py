@@ -65,6 +65,8 @@ class Visual(models.Model):
       'visual_type': self.visual_type,
       'website': self.website,
       'duration': self.duration,
+      'date_watched': self.date_watched,
+      'date_updated': self.date_updated,
       'countries': cs,
       'languages': ls
     }
